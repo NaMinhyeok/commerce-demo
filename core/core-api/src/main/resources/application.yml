@@ -1,0 +1,8 @@
+spring.application.name: commerce-api
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+      - db-core.yml
+  web.resources.add-mappings: false

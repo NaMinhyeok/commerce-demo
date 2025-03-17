@@ -10,7 +10,7 @@ tasks.withType<Jar> {
 
 dependencies {
     implementation(project(":common"))
-    implementation(project(":infrastructure"))
+    implementation(project(":infrastructure:db-core"))
     implementation(project(":core:core-domain"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
