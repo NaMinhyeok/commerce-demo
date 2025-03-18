@@ -1,8 +1,11 @@
 package com.nmh.commerce.domain;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Getter
 public class Money {
     private final BigDecimal value;
 
