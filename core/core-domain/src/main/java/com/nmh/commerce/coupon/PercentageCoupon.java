@@ -2,11 +2,13 @@ package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.domain.Money;
 import com.nmh.commerce.product.Product;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
 @SuperBuilder
 public class PercentageCoupon extends AbstractCoupon {
     private final int percentage;
