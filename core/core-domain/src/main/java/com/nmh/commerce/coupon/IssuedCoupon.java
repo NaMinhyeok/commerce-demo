@@ -9,19 +9,19 @@ import java.time.LocalDateTime;
 @Getter
 public class IssuedCoupon {
     private final Long id;
-    private final AbstractCoupon coupon;
+    private final Coupon coupon;
     private final User user;
     private final LocalDateTime issuedAt;
 
     @Builder
-    private IssuedCoupon(Long id, AbstractCoupon coupon, User user, LocalDateTime issuedAt) {
+    private IssuedCoupon(Long id, Coupon coupon, User user, LocalDateTime issuedAt) {
         this.id = id;
         this.coupon = coupon;
         this.user = user;
         this.issuedAt = issuedAt;
     }
 
-    public static IssuedCoupon issue(AbstractCoupon coupon, User user, LocalDateTime issuedAt) {
+    public static IssuedCoupon issue(Coupon coupon, User user, LocalDateTime issuedAt) {
         return IssuedCoupon.builder()
             .coupon(coupon)
             .user(user)

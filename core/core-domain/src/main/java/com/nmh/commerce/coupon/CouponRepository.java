@@ -4,6 +4,6 @@ import java.util.Optional;
 
 public interface CouponRepository {
 
-    Optional<AbstractCoupon> findById(Long id);
+    Optional<Coupon> findById(Long id);
 
 }
