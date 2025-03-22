@@ -14,7 +14,7 @@ class MoneyTest {
         Money target = Money.of(BigDecimal.ONE);
         Money other = Money.of(BigDecimal.TEN);
         // when
-        Money result = target.add(other);
+        Money result = target.plus(other);
         // then
         then(result).extracting("value")
             .isEqualTo(BigDecimal.valueOf(11));
@@ -26,7 +26,7 @@ class MoneyTest {
         Money target = Money.of(BigDecimal.TEN);
         Money other = Money.of(BigDecimal.ONE);
         // when
-        Money result = target.subtract(other);
+        Money result = target.minus(other);
         // then
         then(result).extracting("value")
             .isEqualTo(BigDecimal.valueOf(9));

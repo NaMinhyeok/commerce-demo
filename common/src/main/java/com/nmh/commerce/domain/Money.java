@@ -17,11 +17,11 @@ public class Money {
         return new Money(value);
     }
 
-    public Money add(Money other) {
+    public Money plus(Money other) {
         return new Money(value.add(other.value));
     }
 
-    public Money subtract(Money other) {
+    public Money minus(Money other) {
         return new Money(value.subtract(other.value));
     }
 

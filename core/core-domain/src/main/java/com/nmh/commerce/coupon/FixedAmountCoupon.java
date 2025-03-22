@@ -20,6 +20,6 @@ public class FixedAmountCoupon extends AbstractCoupon {
     @Override
     Money apply(Product product) {
         super.verify(product);
-        return product.getPrice().subtract(amount);
+        return product.getPrice().minus(amount);
     }
 }
