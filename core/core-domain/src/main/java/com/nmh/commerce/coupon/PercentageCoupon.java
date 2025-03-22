@@ -24,6 +24,6 @@ public class PercentageCoupon extends AbstractCoupon {
         Money discountedPrice = product.getPrice()
             .multiply(Money.of(BigDecimal.valueOf(percentage)))
             .divide(Money.of(BigDecimal.valueOf(100)));
-        return product.getPrice().subtract(discountedPrice);
+        return product.getPrice().minus(discountedPrice);
     }
 }
