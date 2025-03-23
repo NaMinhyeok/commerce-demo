@@ -2,8 +2,11 @@ package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.domain.Money;
 import com.nmh.commerce.product.Product;
+import com.nmh.commerce.user.User;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class Coupon {
@@ -23,5 +26,13 @@ public class Coupon {
     public Money apply(Product product) {
         constraintPolicy.verify(product);
         return discountPolicy.calculateDiscount(product.getPrice());
+    }
+
+    public IssuedCoupon issueTo(User user, LocalDateTime issuedAt) {
+        return IssuedCoupon.issue(
+            this,
+            user,
+            issuedAt
+        );
     }
 }
