@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+// TODO: Entity를 세분화해서 구현해서 사용하는 것이 좋다.
+// TODO: 쿠폰을 엔티티로 생각하면 분리가 될 수 있는데 너무 하나로 찌그러트려놓았다.
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class CouponEntity extends BaseEntity {
