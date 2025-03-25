@@ -1,9 +1,9 @@
 package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.domain.Money;
-import com.nmh.commerce.domain.Percentage;
+import com.nmh.commerce.domain.DiscountRate;
 import com.nmh.commerce.utils.MoneyConverter;
-import com.nmh.commerce.utils.PercentageConverter;
+import com.nmh.commerce.utils.DiscountRateConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,15 +15,15 @@ public class DiscountPolicyEmbeddable {
     @Column(name = "discount_type")
     @Enumerated(EnumType.STRING)
     private DiscountType type;
-    @Convert(converter = PercentageConverter.class)
-    private Percentage percentage;
+    @Convert(converter = DiscountRateConverter.class)
+    private DiscountRate discountRate;
     @Convert(converter = MoneyConverter.class)
     private Money price;
 
     @Builder
-    private DiscountPolicyEmbeddable(DiscountType type, Percentage percentage, Money price) {
+    private DiscountPolicyEmbeddable(DiscountType type, DiscountRate discountRate, Money price) {
         this.type = type;
-        this.percentage = percentage;
+        this.discountRate = discountRate;
         this.price = price;
     }
 
@@ -31,7 +31,7 @@ public class DiscountPolicyEmbeddable {
         if (discountPolicy instanceof PercentageDiscountPolicy) {
             return DiscountPolicyEmbeddable.builder()
                 .type(DiscountType.PERCENTAGE)
-                .percentage(((PercentageDiscountPolicy) discountPolicy).getDiscountRate())
+                .discountRate(((PercentageDiscountPolicy) discountPolicy).getDiscountRate())
                 .build();
         }
         if (discountPolicy instanceof FixedPriceDiscountPolicy) {
@@ -45,7 +45,7 @@ public class DiscountPolicyEmbeddable {
 
     public DiscountPolicy toDomain() {
         return switch (type) {
-            case PERCENTAGE -> new PercentageDiscountPolicy(percentage);
+            case PERCENTAGE -> new PercentageDiscountPolicy(discountRate);
             case FIXED_PRICE -> new FixedPriceDiscountPolicy(price);
         };
     }
