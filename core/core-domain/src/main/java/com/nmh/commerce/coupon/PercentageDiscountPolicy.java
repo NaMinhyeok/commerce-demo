@@ -1,20 +1,20 @@
 package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.domain.Money;
-import com.nmh.commerce.domain.Percentage;
+import com.nmh.commerce.domain.DiscountRate;
 import lombok.Getter;
 
 @Getter
 public class PercentageDiscountPolicy implements DiscountPolicy {
-    private final Percentage discountRate;
+    private final DiscountRate discountRate;
 
-    public PercentageDiscountPolicy(Percentage discountRate) {
+    public PercentageDiscountPolicy(DiscountRate discountRate) {
         this.discountRate = discountRate;
     }
 
     @Override
     public Money calculateDiscount(Money originalPrice) {
-        Money discountPrice = discountRate.apply(originalPrice);
+        Money discountPrice = originalPrice.apply(discountRate);
         return originalPrice.minus(discountPrice);
     }
 }

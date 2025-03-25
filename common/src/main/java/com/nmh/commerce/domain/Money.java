@@ -40,4 +40,8 @@ public class Money {
     public boolean isGreaterThanOrEqual(Money other) {
         return value.compareTo(other.value) >= 0;
     }
+
+    public Money apply(DiscountRate rate) {
+        return new Money(value.multiply(rate.getValue()));
+    }
 }
