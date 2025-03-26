@@ -13,6 +13,6 @@ public class DiscountRateConverter implements AttributeConverter<DiscountRate, B
 
     @Override
     public DiscountRate convertToEntityAttribute(BigDecimal bigDecimal) {
-        return new DiscountRate(bigDecimal);
+        return DiscountRate.of(bigDecimal);
     }
 }

@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 
 @Getter
 public class Money {
+    public static final Money ZERO = Money.of(BigDecimal.ZERO);
+
     private final BigDecimal value;
 
     private Money(BigDecimal value) {
