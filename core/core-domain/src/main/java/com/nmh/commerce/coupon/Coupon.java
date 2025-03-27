@@ -13,15 +13,15 @@ public class Coupon {
     private final String name;
     private final List<DiscountPolicy> discountPolicies;
     private final List<ConstraintPolicy> constraintPolicies;
-    private final ExpirationPeriod expirationPeriod;
+    private final List<ExpirationPeriodPolicy> expirationPeriodPolicies;
 
     @Builder
-    private Coupon(Long id, String name, List<DiscountPolicy> discountPolicies, List<ConstraintPolicy> constraintPolicies, ExpirationPeriod expirationPeriod) {
+    private Coupon(Long id, String name, List<DiscountPolicy> discountPolicies, List<ConstraintPolicy> constraintPolicies, List<ExpirationPeriodPolicy> expirationPeriodPolicies) {
         this.id = id;
         this.name = name;
         this.discountPolicies = discountPolicies;
         this.constraintPolicies = constraintPolicies;
-        this.expirationPeriod = expirationPeriod;
+        this.expirationPeriodPolicies = expirationPeriodPolicies;
     }
 
     public Money apply(Product product) {

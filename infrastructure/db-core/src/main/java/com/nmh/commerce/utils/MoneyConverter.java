@@ -3,10 +3,11 @@ package com.nmh.commerce.utils;
 import com.nmh.commerce.domain.Money;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
 
 import java.math.BigDecimal;
 
-@Convert
+@Converter(autoApply = true)
 public class MoneyConverter implements AttributeConverter<Money, BigDecimal> {
     @Override
     public BigDecimal convertToDatabaseColumn(Money money) {

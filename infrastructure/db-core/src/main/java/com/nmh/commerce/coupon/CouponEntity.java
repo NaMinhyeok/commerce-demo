@@ -2,7 +2,6 @@ package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.BaseEntity;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
@@ -24,15 +23,15 @@ public class CouponEntity extends BaseEntity {
     @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
     private List<ConstraintPolicyEntity> constraintPolicies = new ArrayList<>();
 
-    @Embedded
-    private ExpirationPeriodEmbeddable expirationPeriod;
+    @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
+    private List<ExpirationPeriodPolicyEntity> expirationPeriodPolicies = new ArrayList<>();
 
     @Builder
-    private CouponEntity(String name, List<DiscountPolicyEntity> discountPolicies, List<ConstraintPolicyEntity> constraintPolicies, ExpirationPeriodEmbeddable expirationPeriod) {
+    private CouponEntity(String name, List<DiscountPolicyEntity> discountPolicies, List<ConstraintPolicyEntity> constraintPolicies, List<ExpirationPeriodPolicyEntity> expirationPeriodPolicies) {
         this.name = name;
         this.discountPolicies = discountPolicies;
         this.constraintPolicies = constraintPolicies;
-        this.expirationPeriod = expirationPeriod;
+        this.expirationPeriodPolicies = expirationPeriodPolicies;
     }
 
     public static CouponEntity from(Coupon coupon) {
@@ -40,7 +39,7 @@ public class CouponEntity extends BaseEntity {
             .name(coupon.getName())
             .discountPolicies(coupon.getDiscountPolicies().stream().map(DiscountPolicyEntity::from).toList())
             .constraintPolicies(coupon.getConstraintPolicies().stream().map(ConstraintPolicyEntity::from).toList())
-            .expirationPeriod(ExpirationPeriodEmbeddable.from(coupon.getExpirationPeriod()))
+            .expirationPeriodPolicies(coupon.getExpirationPeriodPolicies().stream().map(ExpirationPeriodPolicyEntity::from).toList())
             .build();
     }
 
@@ -50,7 +49,7 @@ public class CouponEntity extends BaseEntity {
             .name(name)
             .discountPolicies(discountPolicies.stream().map(DiscountPolicyEntity::toDomain).toList())
             .constraintPolicies(constraintPolicies.stream().map(ConstraintPolicyEntity::toDomain).toList())
-            .expirationPeriod(expirationPeriod.toDomain())
+            .expirationPeriodPolicies(expirationPeriodPolicies.stream().map(ExpirationPeriodPolicyEntity::toDomain).toList())
             .build();
     }
 }
