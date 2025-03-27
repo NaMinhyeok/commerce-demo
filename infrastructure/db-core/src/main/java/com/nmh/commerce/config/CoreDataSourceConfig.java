@@ -17,8 +17,6 @@ public class CoreDataSourceConfig {
 
     @Bean
     public HikariDataSource coreDataSource(HikariConfig config) {
-        System.out.println("coreDataSource config: " + config.getUsername());
-        System.out.println("coreDataSource config: " + config.getJdbcUrl());
         return new HikariDataSource(config);
     }
 }
