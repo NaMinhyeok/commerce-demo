@@ -18,7 +18,8 @@ public abstract class DiscountPolicyEntity extends BaseEntity {
     public static DiscountPolicyEntity from(DiscountPolicy policy) {
         if (policy instanceof FixedPriceDiscountPolicy fixed) {
             return FixedPriceDiscountPolicyEntity.from(fixed);
-        } else if (policy instanceof PercentageDiscountPolicy percentage) {
+        }
+        if (policy instanceof PercentageDiscountPolicy percentage) {
             return PercentageDiscountPolicyEntity.from(percentage);
         }
         throw new IllegalArgumentException("지원하지 않는 할인 정책입니다: " + policy.getClass());
