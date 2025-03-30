@@ -43,6 +43,18 @@ public class CouponEntity extends BaseEntity {
             .build();
     }
 
+    public void addDiscountPolicy(DiscountPolicyEntity discountPolicy) {
+        discountPolicies.add(discountPolicy);
+    }
+
+    public void addConstraintPolicy(ConstraintPolicyEntity constraintPolicy) {
+        constraintPolicies.add(constraintPolicy);
+    }
+
+    public void addExpirationPeriodPolicy(ExpirationPeriodPolicyEntity expirationPeriodPolicy) {
+        expirationPeriodPolicies.add(expirationPeriodPolicy);
+    }
+
     public Coupon toDomain() {
         return Coupon.builder()
             .id(getId())
