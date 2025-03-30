@@ -1,7 +1,10 @@
 package com.nmh.commerce.coupon;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class DeadLinePeriodPolicy implements ExpirationPeriodPolicy {
     private final LocalDateTime startAt;
     private final LocalDateTime endAt;

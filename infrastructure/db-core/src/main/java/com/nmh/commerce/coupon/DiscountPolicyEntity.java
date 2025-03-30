@@ -20,12 +20,12 @@ public abstract class DiscountPolicyEntity extends BaseEntity {
         coupon.addDiscountPolicy(this);
     }
 
-    public static DiscountPolicyEntity from(DiscountPolicy policy) {
+    public static DiscountPolicyEntity from(DiscountPolicy policy, CouponEntity coupon) {
         if (policy instanceof FixedPriceDiscountPolicy fixed) {
-            return FixedPriceDiscountPolicyEntity.from(fixed);
+            return FixedPriceDiscountPolicyEntity.from(fixed, coupon);
         }
         if (policy instanceof PercentageDiscountPolicy percentage) {
-            return PercentageDiscountPolicyEntity.from(percentage);
+            return PercentageDiscountPolicyEntity.from(percentage, coupon);
         }
         throw new IllegalArgumentException("지원하지 않는 할인 정책입니다: " + policy.getClass());
     }

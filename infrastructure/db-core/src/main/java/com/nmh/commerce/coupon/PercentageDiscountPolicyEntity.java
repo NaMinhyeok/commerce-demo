@@ -16,12 +16,13 @@ public class PercentageDiscountPolicyEntity extends DiscountPolicyEntity {
     @Convert(converter = DiscountRateConverter.class)
     private DiscountRate discountRate;
 
-    public PercentageDiscountPolicyEntity(DiscountRate discountRate) {
+    public PercentageDiscountPolicyEntity(CouponEntity coupon, DiscountRate discountRate) {
+        super(coupon);
         this.discountRate = discountRate;
     }
 
-    public static PercentageDiscountPolicyEntity from(PercentageDiscountPolicy percentageDiscountPolicy) {
-        return new PercentageDiscountPolicyEntity(percentageDiscountPolicy.getDiscountRate());
+    public static PercentageDiscountPolicyEntity from(PercentageDiscountPolicy percentageDiscountPolicy, CouponEntity coupon) {
+        return new PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.getDiscountRate());
     }
 
     @Override

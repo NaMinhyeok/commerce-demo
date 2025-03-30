@@ -20,12 +20,12 @@ public abstract class ExpirationPeriodPolicyEntity extends BaseEntity {
         coupon.addExpirationPeriodPolicy(this);
     }
 
-    public static ExpirationPeriodPolicyEntity from(ExpirationPeriodPolicy policy) {
+    public static ExpirationPeriodPolicyEntity from(ExpirationPeriodPolicy policy, CouponEntity coupon) {
         if (policy instanceof DeadLinePeriodPolicy deadLinePeriodPolicy) {
-            return DeadLinePeriodPolicyEntity.from(deadLinePeriodPolicy);
+            return DeadLinePeriodPolicyEntity.from(deadLinePeriodPolicy, coupon);
         }
         if (policy instanceof DurationPeriodPolicy durationPeriodPolicy) {
-            return DurationPeriodPolicyEntity.from(durationPeriodPolicy);
+            return DurationPeriodPolicyEntity.from(durationPeriodPolicy, coupon);
         }
         throw new IllegalArgumentException("지원하지 않는 만료 기간 정책입니다: " + policy.getClass());
     }

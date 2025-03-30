@@ -35,12 +35,32 @@ public class CouponEntity extends BaseEntity {
     }
 
     public static CouponEntity from(Coupon coupon) {
-        return CouponEntity.builder()
+        CouponEntity couponEntity = CouponEntity.builder()
             .name(coupon.getName())
-            .discountPolicies(coupon.getDiscountPolicies().stream().map(DiscountPolicyEntity::from).toList())
-            .constraintPolicies(coupon.getConstraintPolicies().stream().map(ConstraintPolicyEntity::from).toList())
-            .expirationPeriodPolicies(coupon.getExpirationPeriodPolicies().stream().map(ExpirationPeriodPolicyEntity::from).toList())
             .build();
+        addDiscountPolicies(coupon, couponEntity);
+        addConstraintPolicies(coupon, couponEntity);
+        addExpirationPeriodPolicies(coupon, couponEntity);
+
+        return couponEntity;
+    }
+
+    private static void addExpirationPeriodPolicies(Coupon coupon, CouponEntity couponEntity) {
+        couponEntity.expirationPeriodPolicies.addAll(coupon.getExpirationPeriodPolicies().stream()
+            .map(policy -> ExpirationPeriodPolicyEntity.from(policy, couponEntity))
+            .toList());
+    }
+
+    private static void addDiscountPolicies(Coupon coupon, CouponEntity couponEntity) {
+        couponEntity.discountPolicies.addAll(coupon.getDiscountPolicies().stream()
+            .map(policy -> DiscountPolicyEntity.from(policy, couponEntity))
+            .toList());
+    }
+
+    private static void addConstraintPolicies(Coupon coupon, CouponEntity couponEntity) {
+        couponEntity.constraintPolicies.addAll(coupon.getConstraintPolicies().stream()
+            .map(policy -> ConstraintPolicyEntity.from(policy, couponEntity))
+            .toList());
     }
 
     public void addDiscountPolicy(DiscountPolicyEntity discountPolicy) {
