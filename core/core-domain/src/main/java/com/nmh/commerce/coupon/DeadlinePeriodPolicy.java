@@ -5,11 +5,11 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class DeadLinePeriodPolicy implements ExpirationPeriodPolicy {
+public class DeadlinePeriodPolicy implements ExpirationPeriodPolicy {
     private final LocalDateTime startAt;
     private final LocalDateTime endAt;
 
-    public DeadLinePeriodPolicy(LocalDateTime startAt, LocalDateTime endAt) {
+    public DeadlinePeriodPolicy(LocalDateTime startAt, LocalDateTime endAt) {
         this.startAt = startAt;
         this.endAt = endAt;
     }

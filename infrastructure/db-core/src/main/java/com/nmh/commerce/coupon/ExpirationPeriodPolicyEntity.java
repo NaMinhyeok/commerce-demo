@@ -21,8 +21,8 @@ public abstract class ExpirationPeriodPolicyEntity extends BaseEntity {
     }
 
     public static ExpirationPeriodPolicyEntity from(ExpirationPeriodPolicy policy, CouponEntity coupon) {
-        if (policy instanceof DeadLinePeriodPolicy deadLinePeriodPolicy) {
-            return DeadLinePeriodPolicyEntity.from(deadLinePeriodPolicy, coupon);
+        if (policy instanceof DeadlinePeriodPolicy deadLinePeriodPolicy) {
+            return DeadlinePeriodPolicyEntity.from(deadLinePeriodPolicy, coupon);
         }
         if (policy instanceof DurationPeriodPolicy durationPeriodPolicy) {
             return DurationPeriodPolicyEntity.from(durationPeriodPolicy, coupon);
