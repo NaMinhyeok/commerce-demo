@@ -1,8 +1,11 @@
 package com.nmh.commerce.coupon;
 
+import lombok.Getter;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+@Getter
 public class DurationPeriodPolicy implements ExpirationPeriodPolicy {
     private final Duration duration;
 

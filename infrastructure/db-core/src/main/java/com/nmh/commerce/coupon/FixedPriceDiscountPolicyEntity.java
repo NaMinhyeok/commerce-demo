@@ -16,12 +16,13 @@ public class FixedPriceDiscountPolicyEntity extends DiscountPolicyEntity {
     @Convert(converter = MoneyConverter.class)
     private Money discountPrice;
 
-    public FixedPriceDiscountPolicyEntity(Money discountPrice) {
+    public FixedPriceDiscountPolicyEntity(CouponEntity coupon, Money discountPrice) {
+        super(coupon);
         this.discountPrice = discountPrice;
     }
 
-    public static FixedPriceDiscountPolicyEntity from(FixedPriceDiscountPolicy fixedPriceDiscountPolicy) {
-        return new FixedPriceDiscountPolicyEntity(fixedPriceDiscountPolicy.getDiscountPrice());
+    public static FixedPriceDiscountPolicyEntity from(FixedPriceDiscountPolicy fixedPriceDiscountPolicy, CouponEntity coupon) {
+        return new FixedPriceDiscountPolicyEntity(coupon, fixedPriceDiscountPolicy.getDiscountPrice());
     }
 
     @Override

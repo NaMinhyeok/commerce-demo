@@ -20,9 +20,9 @@ public abstract class ConstraintPolicyEntity extends BaseEntity {
         coupon.addConstraintPolicy(this);
     }
 
-    public static ConstraintPolicyEntity from(ConstraintPolicy policy) {
+    public static ConstraintPolicyEntity from(ConstraintPolicy policy, CouponEntity coupon) {
         if (policy instanceof MinimumPriceConstraintPolicy minimumPriceConstraintPolicy) {
-            return MinimumPriceConstraintPolicyEntity.from(minimumPriceConstraintPolicy);
+            return MinimumPriceConstraintPolicyEntity.from(minimumPriceConstraintPolicy, coupon);
         }
         throw new IllegalArgumentException("지원하지 않는 제약 정책입니다: " + policy.getClass());
     }

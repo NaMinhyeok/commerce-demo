@@ -16,12 +16,13 @@ public class MinimumPriceConstraintPolicyEntity extends ConstraintPolicyEntity {
     @Convert(converter = MoneyConverter.class)
     private Money minimumPrice;
 
-    public MinimumPriceConstraintPolicyEntity(Money minimumPrice) {
+    private MinimumPriceConstraintPolicyEntity(CouponEntity coupon, Money minimumPrice) {
+        super(coupon);
         this.minimumPrice = minimumPrice;
     }
 
-    public static MinimumPriceConstraintPolicyEntity from(MinimumPriceConstraintPolicy minimumPriceConstraintPolicy) {
-        return new MinimumPriceConstraintPolicyEntity(minimumPriceConstraintPolicy.getMinimumPrice());
+    public static MinimumPriceConstraintPolicyEntity from(MinimumPriceConstraintPolicy minimumPriceConstraintPolicy, CouponEntity coupon) {
+        return new MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.getMinimumPrice());
     }
 
     @Override
