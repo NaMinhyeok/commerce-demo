@@ -18,4 +18,17 @@ public class DiscountRate {
     public static DiscountRate of(BigDecimal value) {
         return new DiscountRate(value);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiscountRate discountRate = (DiscountRate) o;
+        return value.compareTo(discountRate.value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.stripTrailingZeros().hashCode();
+    }
 }
