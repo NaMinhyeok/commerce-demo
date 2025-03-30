@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-class DeadLinePeriodPolicyTest {
+class DeadlinePeriodPolicyTest {
 
     @Test
     void 쿠폰을_사용하는_시점이_유효기한_보다_빠르면_사용할_수_없다() {
         // given
         LocalDateTime now = LocalDateTime.now();
-        DeadLinePeriodPolicy policy = new DeadLinePeriodPolicy(
+        DeadlinePeriodPolicy policy = new DeadlinePeriodPolicy(
             now.minusDays(1),
             now.plusDays(1)
         );
@@ -26,7 +26,7 @@ class DeadLinePeriodPolicyTest {
     void 쿠폰을_사용하는_시점이_유효기간_보다_느리면_사용할_수_없다() {
         // given
         LocalDateTime now = LocalDateTime.now();
-        DeadLinePeriodPolicy policy = new DeadLinePeriodPolicy(
+        DeadlinePeriodPolicy policy = new DeadlinePeriodPolicy(
             now.minusDays(1),
             now.plusDays(1)
         );
