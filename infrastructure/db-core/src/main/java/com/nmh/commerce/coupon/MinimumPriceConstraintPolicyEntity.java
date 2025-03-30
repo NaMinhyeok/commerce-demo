@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MinimumPriceConstraintPolicyEntity extends ConstraintPolicyEntity {
 
     @Convert(converter = MoneyConverter.class)
-    public Money minimumPrice;
+    private Money minimumPrice;
 
     public MinimumPriceConstraintPolicyEntity(Money minimumPrice) {
         this.minimumPrice = minimumPrice;
