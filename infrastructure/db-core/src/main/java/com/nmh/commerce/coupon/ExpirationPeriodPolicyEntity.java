@@ -15,6 +15,11 @@ public abstract class ExpirationPeriodPolicyEntity extends BaseEntity {
     @JoinColumn(name = "coupon_id")
     private CouponEntity coupon;
 
+    protected ExpirationPeriodPolicyEntity(CouponEntity coupon) {
+        this.coupon = coupon;
+        coupon.addExpirationPeriodPolicy(this);
+    }
+
     public static ExpirationPeriodPolicyEntity from(ExpirationPeriodPolicy policy) {
         if (policy instanceof DeadLinePeriodPolicy deadLinePeriodPolicy) {
             return DeadLinePeriodPolicyEntity.from(deadLinePeriodPolicy);

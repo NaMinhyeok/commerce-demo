@@ -15,6 +15,11 @@ public abstract class DiscountPolicyEntity extends BaseEntity {
     @JoinColumn(name = "coupon_id")
     private CouponEntity coupon;
 
+    protected DiscountPolicyEntity(CouponEntity coupon) {
+        this.coupon = coupon;
+        coupon.addDiscountPolicy(this);
+    }
+
     public static DiscountPolicyEntity from(DiscountPolicy policy) {
         if (policy instanceof FixedPriceDiscountPolicy fixed) {
             return FixedPriceDiscountPolicyEntity.from(fixed);
