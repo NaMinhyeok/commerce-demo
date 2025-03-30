@@ -78,4 +78,15 @@ class MoneyTest {
         then(result).isTrue();
     }
 
+    @Test
+    void 금액을_할인율을_이용하여_계산한다() {
+        // given
+        Money target = Money.of(BigDecimal.TEN);
+        DiscountRate discountRate = DiscountRate.of(BigDecimal.valueOf(0.1));
+        // when
+        Money result = target.apply(discountRate);
+        // then
+        Money expected = Money.of(BigDecimal.ONE);
+        then(result).isEqualTo(expected);
+    }
 }

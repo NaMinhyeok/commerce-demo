@@ -46,4 +46,17 @@ public class Money {
     public Money apply(DiscountRate rate) {
         return new Money(value.multiply(rate.getValue()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return value.compareTo(money.value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.stripTrailingZeros().hashCode();
+    }
 }
