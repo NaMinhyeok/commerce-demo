@@ -11,8 +11,8 @@ public class DurationPeriodPolicy implements ExpirationPeriodPolicy {
     }
 
     @Override
-    public void verify(LocalDateTime now) {
-        if (now.isAfter(now.plus(duration))) {
+    public void verify(LocalDateTime issuedAt) {
+        if (LocalDateTime.now().isAfter(issuedAt.plus(duration))) {
             throw new IllegalArgumentException("쿠폰이 만료되었습니다.");
         }
     }
