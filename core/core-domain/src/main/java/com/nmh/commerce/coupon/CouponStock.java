@@ -27,7 +27,11 @@ public class CouponStock {
         if (!isRemaining()) {
             throw new IllegalStateException("쿠폰 재고가 없습니다.");
         }
-        return CouponStock.of(this.couponId, this.remainingQuantity - 1);
+        return CouponStock.builder()
+            .id(this.id)
+            .couponId(this.couponId)
+            .remainingQuantity(this.remainingQuantity - 1)
+            .build();
     }
 
     private boolean isRemaining() {
