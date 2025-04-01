@@ -10,11 +10,17 @@ import java.math.BigDecimal;
 public class DiscountRateConverter implements AttributeConverter<DiscountRate, BigDecimal> {
     @Override
     public BigDecimal convertToDatabaseColumn(DiscountRate discountRate) {
+        if (discountRate == null) {
+            return null;
+        }
         return discountRate.getValue();
     }
 
     @Override
     public DiscountRate convertToEntityAttribute(BigDecimal bigDecimal) {
+        if (bigDecimal == null) {
+            return null;
+        }
         return DiscountRate.of(bigDecimal);
     }
 }

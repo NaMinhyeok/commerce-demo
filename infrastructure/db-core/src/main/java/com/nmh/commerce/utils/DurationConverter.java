@@ -9,11 +9,17 @@ import java.time.Duration;
 public class DurationConverter implements AttributeConverter<Duration, String> {
     @Override
     public String convertToDatabaseColumn(Duration duration) {
-        return duration == null ? null : duration.toString();
+        if(duration == null) {
+            return null;
+        }
+        return duration.toString();
     }
 
     @Override
     public Duration convertToEntityAttribute(String s) {
-        return s == null ? null : Duration.parse(s);
+        if(s == null) {
+            return null;
+        }
+        return Duration.parse(s);
     }
 }
