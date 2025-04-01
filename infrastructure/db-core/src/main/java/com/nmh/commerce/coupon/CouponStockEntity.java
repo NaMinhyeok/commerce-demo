@@ -1,6 +1,7 @@
 package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.BaseEntity;
+import com.nmh.commerce.domain.Quantity;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class CouponStockEntity extends BaseEntity {
     private Long couponId;
-    private int remainingQuantity;
+    private Quantity remainingQuantity;
 
     @Builder
-    private CouponStockEntity(Long couponId, int remainingQuantity) {
+    private CouponStockEntity(Long couponId, Quantity remainingQuantity) {
         this.couponId = couponId;
         this.remainingQuantity = remainingQuantity;
     }

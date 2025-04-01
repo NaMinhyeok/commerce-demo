@@ -1,5 +1,6 @@
 package com.nmh.commerce.coupon;
 
+import com.nmh.commerce.domain.Quantity;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -7,16 +8,16 @@ import lombok.Getter;
 public class CouponStock {
     private final Long id;
     private final Long couponId;
-    private final int remainingQuantity;
+    private final Quantity remainingQuantity;
 
     @Builder
-    private CouponStock(Long id, Long couponId, int remainingQuantity) {
+    private CouponStock(Long id, Long couponId, Quantity remainingQuantity) {
         this.id = id;
         this.couponId = couponId;
         this.remainingQuantity = remainingQuantity;
     }
 
-    public static CouponStock of(Long couponId, int remainingQuantity) {
+    public static CouponStock of(Long couponId, Quantity remainingQuantity) {
         return CouponStock.builder()
             .couponId(couponId)
             .remainingQuantity(remainingQuantity)
@@ -30,11 +31,11 @@ public class CouponStock {
         return CouponStock.builder()
             .id(this.id)
             .couponId(this.couponId)
-            .remainingQuantity(this.remainingQuantity - 1)
+            .remainingQuantity(this.remainingQuantity.subtract(Quantity.of(1)))
             .build();
     }
 
     private boolean isRemaining() {
-        return remainingQuantity > 0;
+        return this.remainingQuantity.isRemaining();
     }
 }

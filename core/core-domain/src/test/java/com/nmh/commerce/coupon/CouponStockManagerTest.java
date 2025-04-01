@@ -1,6 +1,7 @@
 package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.coupon.mock.FakeCouponStockRepository;
+import com.nmh.commerce.domain.Quantity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +20,12 @@ class CouponStockManagerTest {
         CouponStock stock1 = CouponStock.builder()
             .id(1L)
             .couponId(1L)
-            .remainingQuantity(1)
+            .remainingQuantity(Quantity.of(1))
             .build();
         CouponStock stock2 = CouponStock.builder()
             .id(2L)
             .couponId(2L)
-            .remainingQuantity(100)
+            .remainingQuantity(Quantity.of(100))
             .build();
         fakeCouponStockRepository.save(stock1);
         fakeCouponStockRepository.save(stock2);
@@ -36,7 +37,7 @@ class CouponStockManagerTest {
         // when
         CouponStock deductedCouponStock = couponStockManager.deductStock(1L);
         // then
-        then(deductedCouponStock.getRemainingQuantity()).isEqualTo(0);
+        then(deductedCouponStock.getRemainingQuantity()).isEqualTo(Quantity.of(0));
     }
 
 }
