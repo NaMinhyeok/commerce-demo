@@ -1,4 +1,4 @@
-package learning;
+package com.nmh.commerce.learning;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
