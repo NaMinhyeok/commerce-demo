@@ -3,17 +3,24 @@ package com.nmh.commerce.coupon;
 import com.nmh.commerce.coupon.mock.FakeCouponStockRepository;
 import com.nmh.commerce.domain.Quantity;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
 class CouponStockManagerTest {
 
     private CouponStockManager couponStockManager;
+    private CouponStockRepository stockRepository;
 
     @BeforeEach
     void setUp() {
         FakeCouponStockRepository fakeCouponStockRepository = new FakeCouponStockRepository();
+        this.stockRepository = fakeCouponStockRepository;
         this.couponStockManager = CouponStockManager.builder()
             .stockRepository(fakeCouponStockRepository)
             .build();
@@ -38,6 +45,31 @@ class CouponStockManagerTest {
         CouponStock deductedCouponStock = couponStockManager.deductStock(1L);
         // then
         then(deductedCouponStock.getRemainingQuantity()).isEqualTo(Quantity.of(0));
+    }
+
+    @Test
+    void 동시에_100개의_쿠폰의_재고를_감소시킨다() throws InterruptedException {
+        // given
+        int threadCount = 100;
+        ExecutorService executorService = Executors.newFixedThreadPool(32);
+
+        CountDownLatch latch = new CountDownLatch(threadCount);
+        // when
+        for(int i =0; i< threadCount; i++) {
+            executorService.execute(() -> {
+                try {
+                    couponStockManager.deductStock(2L);
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await();
+
+        CouponStock stock = stockRepository.findByCouponId(2L).orElseThrow();
+        // then
+        then(stock.getRemainingQuantity().getValue()).isEqualTo(0);
     }
 
 }
