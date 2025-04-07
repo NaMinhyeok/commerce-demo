@@ -12,16 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component
 public class CouponStockManager {
     private final CouponStockRepository stockRepository;
-    private final Lock lock = new ReentrantLock();
 
-    public CouponStock deductStock(Long couponId) {
-        lock.lock();
-        try {
+    public synchronized CouponStock deductStock(Long couponId) {
         CouponStock stock = stockRepository.findByCouponId(couponId)
             .orElseThrow(() -> new IllegalArgumentException("해당 쿠폰 재고 정보를 찾을 수 없습니다."));
         return stockRepository.save(stock.deductQuantity());
-        } finally {
-            lock.unlock();
-        }
     }
 }
