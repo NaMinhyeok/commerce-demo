@@ -9,18 +9,21 @@ public class CouponStock {
     private final Long id;
     private final Long couponId;
     private final Quantity remainingQuantity;
+    private final Long version;
 
     @Builder
-    private CouponStock(Long id, Long couponId, Quantity remainingQuantity) {
+    private CouponStock(Long id, Long couponId, Quantity remainingQuantity, Long version) {
         this.id = id;
         this.couponId = couponId;
         this.remainingQuantity = remainingQuantity;
+        this.version = version;
     }
 
     public static CouponStock of(Long couponId, Quantity remainingQuantity) {
         return CouponStock.builder()
             .couponId(couponId)
             .remainingQuantity(remainingQuantity)
+            .version(0L)
             .build();
     }
 
@@ -32,6 +35,7 @@ public class CouponStock {
             .id(this.id)
             .couponId(this.couponId)
             .remainingQuantity(this.remainingQuantity.subtract(Quantity.of(1)))
+            .version(this.version)
             .build();
     }
 
