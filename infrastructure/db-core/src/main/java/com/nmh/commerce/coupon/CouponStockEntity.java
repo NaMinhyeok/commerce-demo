@@ -2,10 +2,7 @@ package com.nmh.commerce.coupon;
 
 import com.nmh.commerce.BaseEntity;
 import com.nmh.commerce.domain.Quantity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,12 +14,15 @@ public class CouponStockEntity {
     private Long id;
     private Long couponId;
     private Quantity remainingQuantity;
+    @Version
+    private Long version;
 
     @Builder
-    private CouponStockEntity(Long id, Long couponId, Quantity remainingQuantity) {
+    private CouponStockEntity(Long id, Long couponId, Quantity remainingQuantity, Long version) {
         this.id = id;
         this.couponId = couponId;
         this.remainingQuantity = remainingQuantity;
+        this.version = version;
     }
 
     public static CouponStockEntity from(CouponStock couponStock) {
@@ -30,6 +30,7 @@ public class CouponStockEntity {
             .id(couponStock.getId())
             .couponId(couponStock.getCouponId())
             .remainingQuantity(couponStock.getRemainingQuantity())
+            .version(couponStock.getVersion())
             .build();
     }
 
@@ -38,6 +39,7 @@ public class CouponStockEntity {
             .id(id)
             .couponId(couponId)
             .remainingQuantity(remainingQuantity)
+            .version(version)
             .build();
     }
 }
