@@ -34,4 +34,11 @@ public class FakeCouponStockRepository implements CouponStockRepository {
             .filter(it -> it.getCouponId().equals(couponId))
             .findAny();
     }
+
+    @Override
+    public CouponStock update(CouponStock couponStock) {
+        data.removeIf(it -> it.getId().equals(couponStock.getId()));
+        data.add(couponStock);
+        return couponStock;
+    }
 }

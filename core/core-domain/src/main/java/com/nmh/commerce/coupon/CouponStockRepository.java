@@ -7,4 +7,6 @@ public interface CouponStockRepository {
     CouponStock save(CouponStock couponStock);
 
     Optional<CouponStock> findByCouponId(Long couponId);
+
+    CouponStock update(CouponStock couponStock);
 }
