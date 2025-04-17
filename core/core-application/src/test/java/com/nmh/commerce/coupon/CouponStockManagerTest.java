@@ -68,7 +68,7 @@ class CouponStockManagerTest {
 
         CouponStock stock = stockRepository.findByCouponId(2L).orElseThrow();
         // then
-        then(stock.getRemainingQuantity().getValue()).isEqualTo(0);
+        then(stock.getRemainingQuantity().value).isEqualTo(0);
     }
 
 }

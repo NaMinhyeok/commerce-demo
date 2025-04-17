@@ -12,7 +12,7 @@ public class QuantityConverter implements AttributeConverter<Quantity, Integer> 
         if (quantity == null) {
             return null;
         }
-        return quantity.getValue();
+        return quantity.value;
     }
 
     @Override

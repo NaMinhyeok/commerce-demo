@@ -13,7 +13,7 @@ public class DiscountRateConverter implements AttributeConverter<DiscountRate, B
         if (discountRate == null) {
             return null;
         }
-        return discountRate.getValue();
+        return discountRate.value;
     }
 
     @Override

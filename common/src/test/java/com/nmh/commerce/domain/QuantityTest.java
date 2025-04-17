@@ -27,7 +27,7 @@ class QuantityTest {
         // when
         Quantity result = quantity.add(Quantity.of(5));
         // then
-        then(result.getValue()).isEqualTo(15);
+        then(result.value).isEqualTo(15);
     }
 
     @Test
@@ -37,7 +37,7 @@ class QuantityTest {
         // when
         Quantity result = quantity.subtract(Quantity.of(5));
         // then
-        then(result.getValue()).isEqualTo(5);
+        then(result.value).isEqualTo(5);
     }
 
     @Test

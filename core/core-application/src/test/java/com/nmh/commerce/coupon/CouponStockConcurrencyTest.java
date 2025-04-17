@@ -43,6 +43,6 @@ public class CouponStockConcurrencyTest extends CoreApplicationIntegrationTest {
 
         CouponStock stock = couponStockRepository.findByCouponId(savedStock.getCouponId()).orElseThrow();
         // then
-        then(stock.getRemainingQuantity().getValue()).isEqualTo(0);
+        then(stock.getRemainingQuantity().value).isEqualTo(0);
     }
 }
