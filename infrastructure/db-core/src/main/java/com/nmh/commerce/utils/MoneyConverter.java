@@ -14,7 +14,7 @@ public class MoneyConverter implements AttributeConverter<Money, BigDecimal> {
         if (money == null) {
             return null;
         }
-        return money.getValue();
+        return money.value;
     }
 
     @Override

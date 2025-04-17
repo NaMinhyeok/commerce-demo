@@ -17,7 +17,7 @@ class DiscountRateTest {
         // when
         DiscountRate discountRate = DiscountRate.of(BigDecimal.valueOf(0.33));
         // then
-        then(discountRate.getValue())
+        then(discountRate.value)
             .isEqualTo(BigDecimal.valueOf(0.33));
     }
 
