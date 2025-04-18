@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.apply
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
@@ -7,7 +8,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.25" apply false
     id("org.springframework.boot") version "3.4.3" apply false
     id("io.spring.dependency-management") version "1.1.7"
-    kotlin("jvm")
+    kotlin("jvm") version "1.9.25" apply false
 }
 
 subprojects {
@@ -53,10 +54,15 @@ subprojects {
         enabled = true
     }
 
-}
-
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+    tasks.withType<KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+            freeCompilerArgs.set(
+                listOf(
+                    "-Xjsr305=strict",
+                )
+            )
+        }
     }
+
 }
