@@ -3,7 +3,7 @@ package com.nmh.commerce.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class Money private constructor(@JvmField val value: BigDecimal) {
+class Money private constructor( val value: BigDecimal) {
     fun plus(other: Money): Money {
         return Money(value.add(other.value))
     }
@@ -44,10 +44,8 @@ class Money private constructor(@JvmField val value: BigDecimal) {
     }
 
     companion object {
-        @JvmField
         val ZERO: Money = of(BigDecimal.ZERO)
 
-        @JvmStatic
         fun of(value: BigDecimal): Money {
             return Money(value)
         }

@@ -20,7 +20,6 @@ class MinimumPriceConstraintPolicyEntity private constructor(
     }
 
     companion object {
-        @JvmStatic
         fun from(
             minimumPriceConstraintPolicy: MinimumPriceConstraintPolicy,
             coupon: CouponEntity

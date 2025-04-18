@@ -6,10 +6,10 @@ import java.util.function.Consumer
 
 class Coupon (
     val id: Long?,
-    @JvmField val name: String?,
-    @JvmField val discountPolicies: MutableList<DiscountPolicy>,
-    @JvmField val constraintPolicies: MutableList<ConstraintPolicy>,
-    @JvmField val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>
+     val name: String?,
+     val discountPolicies: MutableList<DiscountPolicy>,
+     val constraintPolicies: MutableList<ConstraintPolicy>,
+     val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>
 ) {
     fun apply(product: Product): Money {
         constraintPolicies.forEach(Consumer { constraintPolicy: ConstraintPolicy -> constraintPolicy.verify(product) })

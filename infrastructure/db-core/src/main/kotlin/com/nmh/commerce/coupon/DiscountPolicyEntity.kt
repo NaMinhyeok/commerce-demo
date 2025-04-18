@@ -22,7 +22,6 @@ abstract class DiscountPolicyEntity protected constructor(coupon: CouponEntity) 
     abstract fun toDomain(): DiscountPolicy?
 
     companion object {
-        @JvmStatic
         fun from(policy: DiscountPolicy, coupon: CouponEntity): DiscountPolicyEntity {
             if (policy is FixedPriceDiscountPolicy) {
                 return FixedPriceDiscountPolicyEntity.from(policy, coupon)

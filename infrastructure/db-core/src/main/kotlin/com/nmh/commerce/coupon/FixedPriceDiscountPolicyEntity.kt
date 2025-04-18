@@ -18,7 +18,6 @@ class FixedPriceDiscountPolicyEntity(
     }
 
     companion object {
-        @JvmStatic
         fun from(
             fixedPriceDiscountPolicy: FixedPriceDiscountPolicy,
             coupon: CouponEntity

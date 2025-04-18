@@ -7,7 +7,6 @@ import java.time.LocalDateTime
 
 @MappedSuperclass
 abstract class BaseEntity {
-    @JvmField
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null

@@ -16,7 +16,6 @@ class CouponStockEntity private constructor(
     }
 
     companion object {
-        @JvmStatic
         fun from(couponStock: CouponStock): CouponStockEntity {
             return CouponStockEntity(
                 couponStock.id,

@@ -19,7 +19,6 @@ abstract class ExpirationPeriodPolicyEntity protected constructor(coupon: Coupon
     abstract fun toDomain(): ExpirationPeriodPolicy?
 
     companion object {
-        @JvmStatic
         fun from(policy: ExpirationPeriodPolicy, coupon: CouponEntity): ExpirationPeriodPolicyEntity {
             if (policy is DeadlinePeriodPolicy) {
                 return DeadlinePeriodPolicyEntity.from(policy, coupon)

@@ -10,7 +10,6 @@ class UserEntity private constructor(private val name: String?) : BaseEntity() {
     }
 
     companion object {
-        @JvmStatic
         fun from(user: User): UserEntity {
             return UserEntity(user.name)
         }

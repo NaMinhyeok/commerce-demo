@@ -19,7 +19,6 @@ abstract class ConstraintPolicyEntity protected constructor(coupon: CouponEntity
     abstract fun toDomain(): ConstraintPolicy?
 
     companion object {
-        @JvmStatic
         fun from(policy: ConstraintPolicy, coupon: CouponEntity): ConstraintPolicyEntity {
             if (policy is MinimumPriceConstraintPolicy) {
                 return MinimumPriceConstraintPolicyEntity.from(policy, coupon)
