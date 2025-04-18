@@ -2,7 +2,7 @@ package com.nmh.commerce.domain
 
 import java.util.*
 
-class Quantity private constructor(@JvmField val value: Int) {
+class Quantity private constructor(val value: Int) {
     fun add(quantity: Quantity): Quantity {
         return Quantity(this.value + quantity.value)
     }
@@ -26,7 +26,6 @@ class Quantity private constructor(@JvmField val value: Int) {
     }
 
     companion object {
-        @JvmStatic
         fun of(value: Int): Quantity {
             require(value >= 0) { "수량은 0 이상이어야 합니다." }
             return Quantity(value)

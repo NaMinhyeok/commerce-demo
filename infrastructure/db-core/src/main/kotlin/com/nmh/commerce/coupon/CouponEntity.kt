@@ -46,7 +46,6 @@ class CouponEntity : BaseEntity {
     }
 
     companion object {
-        @JvmStatic
         fun from(coupon: Coupon): CouponEntity {
             val couponEntity = CouponEntity()
             couponEntity.name = coupon.name

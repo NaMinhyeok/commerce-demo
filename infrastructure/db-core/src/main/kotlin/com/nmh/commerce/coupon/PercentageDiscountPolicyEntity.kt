@@ -20,7 +20,6 @@ class PercentageDiscountPolicyEntity(
     }
 
     companion object {
-        @JvmStatic
         fun from(
             percentageDiscountPolicy: PercentageDiscountPolicy,
             coupon: CouponEntity

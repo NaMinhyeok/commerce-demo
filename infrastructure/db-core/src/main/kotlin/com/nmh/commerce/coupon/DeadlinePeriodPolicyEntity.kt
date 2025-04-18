@@ -16,7 +16,6 @@ class DeadlinePeriodPolicyEntity private constructor(
     }
 
     companion object {
-        @JvmStatic
         fun from(deadLinePeriodPolicy: DeadlinePeriodPolicy, coupon: CouponEntity): DeadlinePeriodPolicyEntity {
             return DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt)
         }

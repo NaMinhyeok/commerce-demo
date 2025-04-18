@@ -3,7 +3,6 @@ package com.nmh.commerce.domain
 import java.math.BigDecimal
 
 class DiscountRate private constructor(value: BigDecimal) {
-    @JvmField
     val value: BigDecimal
 
     init {
@@ -23,7 +22,6 @@ class DiscountRate private constructor(value: BigDecimal) {
     }
 
     companion object {
-        @JvmStatic
         fun of(value: BigDecimal): DiscountRate {
             return DiscountRate(value)
         }

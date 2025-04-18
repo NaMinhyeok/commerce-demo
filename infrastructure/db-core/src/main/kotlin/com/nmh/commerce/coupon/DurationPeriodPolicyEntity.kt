@@ -13,7 +13,6 @@ class DurationPeriodPolicyEntity private constructor(coupon: CouponEntity, priva
     }
 
     companion object {
-        @JvmStatic
         fun from(durationPeriodPolicy: DurationPeriodPolicy, coupon: CouponEntity): DurationPeriodPolicyEntity {
             return DurationPeriodPolicyEntity(coupon, durationPeriodPolicy.duration)
         }
