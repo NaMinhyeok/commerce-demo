@@ -5,7 +5,7 @@ import com.nmh.commerce.domain.Quantity.Companion.of
 
 class CouponStock (
     @JvmField val id: Long?,
-    @JvmField val couponId: Long?,
+    @JvmField val couponId: Long,
     @JvmField val remainingQuantity: Quantity,
     @JvmField val version: Long?
 ) {
@@ -19,7 +19,7 @@ class CouponStock (
 
     companion object {
         @JvmStatic
-        fun of(couponId: Long?, remainingQuantity: Quantity): CouponStock? {
+        fun of(couponId: Long, remainingQuantity: Quantity): CouponStock? {
             return CouponStock(null, couponId, remainingQuantity, null)
         }
     }
