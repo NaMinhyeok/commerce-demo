@@ -16,10 +16,7 @@ class MinimumPriceConstraintPolicyTest {
         MinimumPriceConstraintPolicy policy = new MinimumPriceConstraintPolicy(
             Money.of(BigDecimal.valueOf(3000))
         );
-
-        Product product = Product.builder()
-            .price(Money.of(BigDecimal.valueOf(2000)))
-            .build();
+        Product product = new Product(0L, "상품", Money.of(BigDecimal.valueOf(2000)));
         // when
         // then
         thenThrownBy(() -> policy.verify(product))

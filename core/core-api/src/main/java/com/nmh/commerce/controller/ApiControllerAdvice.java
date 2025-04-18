@@ -16,12 +16,12 @@ public class ApiControllerAdvice {
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ApiResponse<?>> handleCoreException(CustomException e) {
         log.info("CustomException : {}", e.getMessage(), e);
-        return new ResponseEntity<>(ApiResponse.error(e.errorType, e.getData()), HttpStatusCode.valueOf(e.errorType.status));
+        return new ResponseEntity<>(ApiResponse.error(e.errorType, e.data), HttpStatusCode.valueOf(e.errorType.getStatus()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleException(Exception e) {
         log.error("Exception : {}", e.getMessage(), e);
-        return new ResponseEntity<>(ApiResponse.error(ErrorType.DEFAULT_ERROR), HttpStatusCode.valueOf(ErrorType.DEFAULT_ERROR.status));
+        return new ResponseEntity<>(ApiResponse.error(ErrorType.DEFAULT_ERROR), HttpStatusCode.valueOf(ErrorType.DEFAULT_ERROR.getStatus()));
     }
 }

@@ -5,7 +5,7 @@ abstract class CustomException : RuntimeException {
     val errorType: ErrorType
 
     @JvmField
-    protected val data: Any?
+    val data: Any?
 
     constructor(errorType: ErrorType) : super(errorType.message) {
         this.errorType = errorType

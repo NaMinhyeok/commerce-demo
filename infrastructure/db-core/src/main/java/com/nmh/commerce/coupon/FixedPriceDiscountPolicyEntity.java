@@ -22,7 +22,7 @@ public class FixedPriceDiscountPolicyEntity extends DiscountPolicyEntity {
     }
 
     public static FixedPriceDiscountPolicyEntity from(FixedPriceDiscountPolicy fixedPriceDiscountPolicy, CouponEntity coupon) {
-        return new FixedPriceDiscountPolicyEntity(coupon, fixedPriceDiscountPolicy.getDiscountPrice());
+        return new FixedPriceDiscountPolicyEntity(coupon, fixedPriceDiscountPolicy.discountPrice);
     }
 
     @Override

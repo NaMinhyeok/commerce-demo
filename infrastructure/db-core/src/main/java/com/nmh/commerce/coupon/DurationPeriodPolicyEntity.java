@@ -20,7 +20,7 @@ public class DurationPeriodPolicyEntity extends ExpirationPeriodPolicyEntity {
     }
 
     public static DurationPeriodPolicyEntity from(DurationPeriodPolicy durationPeriodPolicy, CouponEntity coupon) {
-        return new DurationPeriodPolicyEntity(coupon, durationPeriodPolicy.getDuration());
+        return new DurationPeriodPolicyEntity(coupon, durationPeriodPolicy.duration);
     }
 
     @Override

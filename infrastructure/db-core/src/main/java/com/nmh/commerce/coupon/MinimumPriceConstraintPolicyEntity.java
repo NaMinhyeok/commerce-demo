@@ -22,7 +22,7 @@ public class MinimumPriceConstraintPolicyEntity extends ConstraintPolicyEntity {
     }
 
     public static MinimumPriceConstraintPolicyEntity from(MinimumPriceConstraintPolicy minimumPriceConstraintPolicy, CouponEntity coupon) {
-        return new MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.getMinimumPrice());
+        return new MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.minimumPrice);
     }
 
     @Override

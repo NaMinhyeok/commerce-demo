@@ -6,14 +6,14 @@ class ErrorMessage {
     private val data: Any?
 
     constructor(errorType: ErrorType) {
-        this.code = errorType.getCode().name
-        this.message = errorType.getMessage()
+        this.code = errorType.code.name
+        this.message = errorType.message
         this.data = null
     }
 
     constructor(errorType: ErrorType, data: Any?) {
-        this.code = errorType.getCode().name
-        this.message = errorType.getMessage()
+        this.code = errorType.code.name
+        this.message = errorType.message
         this.data = data
     }
 }

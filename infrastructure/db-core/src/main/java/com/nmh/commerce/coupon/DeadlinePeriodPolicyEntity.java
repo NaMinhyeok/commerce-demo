@@ -21,7 +21,7 @@ public class DeadlinePeriodPolicyEntity extends ExpirationPeriodPolicyEntity {
     }
 
     public static DeadlinePeriodPolicyEntity from(DeadlinePeriodPolicy deadLinePeriodPolicy, CouponEntity coupon) {
-        return new DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.getStartAt(), deadLinePeriodPolicy.getEndAt());
+        return new DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt);
     }
 
     @Override
