@@ -18,14 +18,11 @@ public class UserEntity extends BaseEntity {
 
     public static UserEntity from(User user) {
         return UserEntity.builder()
-            .name(user.getName())
+            .name(user.name)
             .build();
     }
 
     public User toDomain() {
-        return User.builder()
-            .id(getId())
-            .name(name)
-            .build();
+        return new User(getId(),name);
     }
 }

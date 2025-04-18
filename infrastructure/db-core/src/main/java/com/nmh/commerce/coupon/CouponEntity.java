@@ -36,7 +36,7 @@ public class CouponEntity extends BaseEntity {
 
     public static CouponEntity from(Coupon coupon) {
         CouponEntity couponEntity = CouponEntity.builder()
-            .name(coupon.getName())
+            .name(coupon.name)
             .build();
         addDiscountPolicies(coupon, couponEntity);
         addConstraintPolicies(coupon, couponEntity);
@@ -46,19 +46,19 @@ public class CouponEntity extends BaseEntity {
     }
 
     private static void addExpirationPeriodPolicies(Coupon coupon, CouponEntity couponEntity) {
-        couponEntity.expirationPeriodPolicies.addAll(coupon.getExpirationPeriodPolicies().stream()
+        couponEntity.expirationPeriodPolicies.addAll(coupon.expirationPeriodPolicies.stream()
             .map(policy -> ExpirationPeriodPolicyEntity.from(policy, couponEntity))
             .toList());
     }
 
     private static void addDiscountPolicies(Coupon coupon, CouponEntity couponEntity) {
-        couponEntity.discountPolicies.addAll(coupon.getDiscountPolicies().stream()
+        couponEntity.discountPolicies.addAll(coupon.discountPolicies.stream()
             .map(policy -> DiscountPolicyEntity.from(policy, couponEntity))
             .toList());
     }
 
     private static void addConstraintPolicies(Coupon coupon, CouponEntity couponEntity) {
-        couponEntity.constraintPolicies.addAll(coupon.getConstraintPolicies().stream()
+        couponEntity.constraintPolicies.addAll(coupon.constraintPolicies.stream()
             .map(policy -> ConstraintPolicyEntity.from(policy, couponEntity))
             .toList());
     }
@@ -76,12 +76,11 @@ public class CouponEntity extends BaseEntity {
     }
 
     public Coupon toDomain() {
-        return Coupon.builder()
-            .id(getId())
-            .name(name)
-            .discountPolicies(discountPolicies.stream().map(DiscountPolicyEntity::toDomain).toList())
-            .constraintPolicies(constraintPolicies.stream().map(ConstraintPolicyEntity::toDomain).toList())
-            .expirationPeriodPolicies(expirationPeriodPolicies.stream().map(ExpirationPeriodPolicyEntity::toDomain).toList())
-            .build();
+        return new Coupon(getId(),
+            name,
+            discountPolicies.stream().map(DiscountPolicyEntity::toDomain).toList(),
+            constraintPolicies.stream().map(ConstraintPolicyEntity::toDomain).toList(),
+            expirationPeriodPolicies.stream().map(ExpirationPeriodPolicyEntity::toDomain).toList());
+
     }
 }

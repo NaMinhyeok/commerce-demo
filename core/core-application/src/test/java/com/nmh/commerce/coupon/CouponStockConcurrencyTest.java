@@ -32,7 +32,7 @@ public class CouponStockConcurrencyTest extends CoreApplicationIntegrationTest {
         for (int i = 0; i < threadCount; i++) {
             executorService.execute(() -> {
                 try {
-                    couponStockManager.deductStock(savedStock.getCouponId());
+                    couponStockManager.deductStock(savedStock.couponId);
                 } finally {
                     latch.countDown();
                 }
@@ -41,8 +41,8 @@ public class CouponStockConcurrencyTest extends CoreApplicationIntegrationTest {
 
         latch.await();
 
-        CouponStock stock = couponStockRepository.findByCouponId(savedStock.getCouponId()).orElseThrow();
+        CouponStock stock = couponStockRepository.findByCouponId(savedStock.couponId).orElseThrow();
         // then
-        then(stock.getRemainingQuantity().value).isEqualTo(0);
+        then(stock.remainingQuantity.value).isEqualTo(0);
     }
 }

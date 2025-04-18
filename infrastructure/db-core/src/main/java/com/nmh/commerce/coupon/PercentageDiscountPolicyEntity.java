@@ -22,7 +22,7 @@ public class PercentageDiscountPolicyEntity extends DiscountPolicyEntity {
     }
 
     public static PercentageDiscountPolicyEntity from(PercentageDiscountPolicy percentageDiscountPolicy, CouponEntity coupon) {
-        return new PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.getDiscountRate());
+        return new PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.discountRate);
     }
 
     @Override

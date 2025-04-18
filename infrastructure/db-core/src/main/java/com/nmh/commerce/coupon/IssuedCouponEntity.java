@@ -32,18 +32,13 @@ public class IssuedCouponEntity extends BaseEntity {
 
     public static IssuedCouponEntity from(IssuedCoupon issuedCoupon) {
         return IssuedCouponEntity.builder()
-            .coupon(CouponEntity.from(issuedCoupon.getCoupon()))
-            .user(UserEntity.from(issuedCoupon.getUser()))
-            .issuedAt(issuedCoupon.getIssuedAt())
+            .coupon(CouponEntity.from(issuedCoupon.coupon))
+            .user(UserEntity.from(issuedCoupon.user))
+            .issuedAt(issuedCoupon.issuedAt)
             .build();
     }
 
     public IssuedCoupon toDomain() {
-        return IssuedCoupon.builder()
-            .id(getId())
-            .coupon(coupon.toDomain())
-            .user(user.toDomain())
-            .issuedAt(issuedAt)
-            .build();
+        return new IssuedCoupon(getId(), coupon.toDomain(), user.toDomain(), issuedAt);
     }
 }

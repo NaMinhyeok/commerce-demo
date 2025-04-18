@@ -27,19 +27,14 @@ public class CouponStockEntity {
 
     public static CouponStockEntity from(CouponStock couponStock) {
         return CouponStockEntity.builder()
-            .id(couponStock.getId())
-            .couponId(couponStock.getCouponId())
-            .remainingQuantity(couponStock.getRemainingQuantity())
-            .version(couponStock.getVersion())
+            .id(couponStock.id)
+            .couponId(couponStock.couponId)
+            .remainingQuantity(couponStock.remainingQuantity)
+            .version(couponStock.version)
             .build();
     }
 
     public CouponStock toDomain() {
-        return CouponStock.builder()
-            .id(id)
-            .couponId(couponId)
-            .remainingQuantity(remainingQuantity)
-            .version(version)
-            .build();
+        return new CouponStock(id, couponId, remainingQuantity, version);
     }
 }

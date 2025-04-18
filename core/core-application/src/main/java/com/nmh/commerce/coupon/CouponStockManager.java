@@ -25,7 +25,7 @@ public class CouponStockManager {
     public CouponStock deductStock(Long couponId) {
         CouponStock stock = stockRepository.findByCouponId(couponId)
             .orElseThrow(() -> new IllegalArgumentException("해당 쿠폰 재고 정보를 찾을 수 없습니다."));
-        log.info("시도: couponId={}, version={}", couponId, stock.getVersion());
+        log.info("시도: couponId={}, version={}", couponId, stock.version);
         CouponStock updatedStock = stock.deductQuantity();
         return stockRepository.update(updatedStock);
     }

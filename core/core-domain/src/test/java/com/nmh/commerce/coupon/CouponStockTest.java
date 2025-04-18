@@ -15,7 +15,7 @@ class CouponStockTest {
         // when
         CouponStock deductedStock = stock.deductQuantity();
         // then
-        then(deductedStock.getRemainingQuantity()).isEqualTo(Quantity.of(0));
+        then(deductedStock.remainingQuantity).isEqualTo(Quantity.of(0));
     }
 
     @Test
