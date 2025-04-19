@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Component
 class SystemLocalDateTimeHolder : LocalDateTimeHolder {
-    override fun now(): LocalDateTime? {
+    override fun now(): LocalDateTime {
         return LocalDateTime.now()
     }
 }

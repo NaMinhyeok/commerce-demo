@@ -6,8 +6,8 @@ import org.springframework.boot.runApplication
 
 @ConfigurationPropertiesScan
 @SpringBootApplication
-class CoreDbTestApplication
+class CommerceApplication
 
 fun main(args: Array<String>) {
-    runApplication<CoreDbTestApplication>(*args)
+    runApplication<CommerceApplication>(*args)
 }

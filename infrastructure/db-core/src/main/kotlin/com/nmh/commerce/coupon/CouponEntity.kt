@@ -6,8 +6,9 @@ import jakarta.persistence.Entity
 import jakarta.persistence.OneToMany
 
 @Entity
-class CouponEntity : BaseEntity {
-    private var name: String? = null
+class CouponEntity(
+    var name: String
+) : BaseEntity() {
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
     private var discountPolicies: MutableList<DiscountPolicyEntity?> = ArrayList()
@@ -19,7 +20,7 @@ class CouponEntity : BaseEntity {
     private var expirationPeriodPolicies: MutableList<ExpirationPeriodPolicyEntity?> =
         ArrayList()
 
-    constructor()
+    constructor() : this("")
 
     fun addDiscountPolicy(discountPolicy: DiscountPolicyEntity?) {
         discountPolicies.add(discountPolicy)
@@ -37,9 +38,9 @@ class CouponEntity : BaseEntity {
         return Coupon(
             id,
             name,
-            discountPolicies.stream().map<DiscountPolicy> { obj: DiscountPolicyEntity? -> obj!!.toDomain() }.toList(),
-            constraintPolicies.stream().map<ConstraintPolicy> { obj: ConstraintPolicyEntity? -> obj!!.toDomain() }.toList(),
-            expirationPeriodPolicies.stream().map<ExpirationPeriodPolicy> { obj: ExpirationPeriodPolicyEntity? -> obj!!.toDomain() }.toList()
+            discountPolicies.stream().map { obj: DiscountPolicyEntity? -> obj!!.toDomain() }.toList(),
+            constraintPolicies.stream().map { obj: ConstraintPolicyEntity? -> obj!!.toDomain() }.toList(),
+            expirationPeriodPolicies.stream().map { obj: ExpirationPeriodPolicyEntity? -> obj!!.toDomain() }.toList()
         )
     }
 
