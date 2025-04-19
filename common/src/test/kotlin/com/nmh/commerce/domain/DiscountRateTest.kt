@@ -1,8 +1,6 @@
 package com.nmh.commerce.domain
 
-import com.nmh.commerce.domain.DiscountRate
 import org.assertj.core.api.BDDAssertions
-import org.assertj.core.api.ThrowableAssert
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource

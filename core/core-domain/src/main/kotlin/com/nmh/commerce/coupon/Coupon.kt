@@ -4,12 +4,12 @@ import com.nmh.commerce.domain.Money
 import com.nmh.commerce.product.Product
 import java.util.function.Consumer
 
-class Coupon (
+class Coupon(
     val id: Long?,
-     val name: String?,
-     val discountPolicies: MutableList<DiscountPolicy>,
-     val constraintPolicies: MutableList<ConstraintPolicy>,
-     val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>
+    val name: String,
+    val discountPolicies: MutableList<DiscountPolicy>,
+    val constraintPolicies: MutableList<ConstraintPolicy>,
+    val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>
 ) {
     fun apply(product: Product): Money {
         constraintPolicies.forEach(Consumer { constraintPolicy: ConstraintPolicy -> constraintPolicy.verify(product) })

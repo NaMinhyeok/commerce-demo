@@ -5,8 +5,9 @@ import org.hibernate.StaleObjectStateException
 import org.springframework.stereotype.Repository
 
 @Repository
-class CouponStockRepositoryImpl(private val couponStockJpaRepository: CouponStockJpaRepository) :
-    CouponStockRepository {
+class CouponStockRepositoryImpl(
+    private val couponStockJpaRepository: CouponStockJpaRepository
+) : CouponStockRepository {
     override fun save(couponStock: CouponStock): CouponStock {
         return couponStockJpaRepository.save(CouponStockEntity.from(couponStock)).toDomain()
     }

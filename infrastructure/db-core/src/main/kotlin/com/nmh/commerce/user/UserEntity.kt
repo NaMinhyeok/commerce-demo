@@ -4,7 +4,9 @@ import com.nmh.commerce.BaseEntity
 import jakarta.persistence.Entity
 
 @Entity
-class UserEntity private constructor(private val name: String?) : BaseEntity() {
+class UserEntity private constructor(
+    private val name: String
+) : BaseEntity() {
     fun toDomain(): User {
         return User(id, name)
     }

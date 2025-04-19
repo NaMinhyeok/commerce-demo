@@ -37,11 +37,9 @@ class CouponEntity : BaseEntity {
         return Coupon(
             id,
             name,
-            discountPolicies.stream().map<DiscountPolicy?> { obj: DiscountPolicyEntity? -> obj!!.toDomain() }.toList(),
-            constraintPolicies.stream().map<ConstraintPolicy?> { obj: ConstraintPolicyEntity? -> obj!!.toDomain() }
-                .toList(),
-            expirationPeriodPolicies.stream()
-                .map<ExpirationPeriodPolicy?> { obj: ExpirationPeriodPolicyEntity? -> obj!!.toDomain() }.toList()
+            discountPolicies.stream().map<DiscountPolicy> { obj: DiscountPolicyEntity? -> obj!!.toDomain() }.toList(),
+            constraintPolicies.stream().map<ConstraintPolicy> { obj: ConstraintPolicyEntity? -> obj!!.toDomain() }.toList(),
+            expirationPeriodPolicies.stream().map<ExpirationPeriodPolicy> { obj: ExpirationPeriodPolicyEntity? -> obj!!.toDomain() }.toList()
         )
     }
 

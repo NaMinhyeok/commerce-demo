@@ -9,9 +9,9 @@ import jakarta.persistence.Entity
 @Entity
 @DiscriminatorValue("FixedPriceDiscountPolicy")
 class FixedPriceDiscountPolicyEntity(
-    coupon: CouponEntity, @field:Convert(
-        converter = MoneyConverter::class
-    ) private val discountPrice: Money
+    coupon: CouponEntity,
+    @field:Convert(converter = MoneyConverter::class)
+    private val discountPrice: Money
 ) : DiscountPolicyEntity(coupon) {
     override fun toDomain(): DiscountPolicy {
         return FixedPriceDiscountPolicy(discountPrice)

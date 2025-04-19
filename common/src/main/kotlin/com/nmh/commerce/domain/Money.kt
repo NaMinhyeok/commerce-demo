@@ -3,7 +3,9 @@ package com.nmh.commerce.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class Money private constructor( val value: BigDecimal) {
+class Money private constructor(
+    val value: BigDecimal
+) {
     fun plus(other: Money): Money {
         return Money(value.add(other.value))
     }

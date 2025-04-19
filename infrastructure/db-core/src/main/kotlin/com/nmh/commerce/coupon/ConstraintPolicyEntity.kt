@@ -6,17 +6,17 @@ import jakarta.persistence.*
 @Entity
 @DiscriminatorColumn(name = "constraint_policy_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-abstract class ConstraintPolicyEntity protected constructor(coupon: CouponEntity) : BaseEntity() {
+abstract class ConstraintPolicyEntity protected constructor(
     @ManyToOne
     @JoinColumn(name = "coupon_id")
-    private val coupon: CouponEntity?
+    private val coupon: CouponEntity
+) : BaseEntity() {
 
     init {
-        this.coupon = coupon
         coupon.addConstraintPolicy(this)
     }
 
-    abstract fun toDomain(): ConstraintPolicy?
+    abstract fun toDomain(): ConstraintPolicy
 
     companion object {
         fun from(policy: ConstraintPolicy, coupon: CouponEntity): ConstraintPolicyEntity {

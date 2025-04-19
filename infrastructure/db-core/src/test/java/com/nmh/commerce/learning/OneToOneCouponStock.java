@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class OneToOneCouponStock {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
