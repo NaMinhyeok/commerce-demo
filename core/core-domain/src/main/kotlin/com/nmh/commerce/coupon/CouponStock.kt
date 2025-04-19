@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.domain.Quantity
 import com.nmh.commerce.domain.Quantity.Companion.of
 
-class CouponStock (
+class CouponStock(
     val id: Long?,
     val couponId: Long,
     val remainingQuantity: Quantity,

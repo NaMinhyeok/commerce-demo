@@ -10,9 +10,7 @@ import jakarta.persistence.Entity
 @Entity
 class MinimumPriceConstraintPolicyEntity private constructor(
     coupon: CouponEntity,
-    @field:Convert(
-        converter = MoneyConverter::class
-    )
+    @field:Convert(converter = MoneyConverter::class)
     private val minimumPrice: Money
 ) : ConstraintPolicyEntity(coupon) {
     override fun toDomain(): ConstraintPolicy {

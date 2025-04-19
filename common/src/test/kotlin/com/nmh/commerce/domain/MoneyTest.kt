@@ -1,7 +1,5 @@
 package com.nmh.commerce.domain
 
-import com.nmh.commerce.domain.DiscountRate
-import com.nmh.commerce.domain.Money
 import org.assertj.core.api.BDDAssertions
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal

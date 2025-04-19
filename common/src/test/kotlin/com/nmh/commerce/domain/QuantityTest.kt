@@ -5,7 +5,6 @@ import org.assertj.core.api.BDDAssertions
 import org.assertj.core.api.ThrowableAssert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.function.Executable
 
 internal class QuantityTest {
     @Test

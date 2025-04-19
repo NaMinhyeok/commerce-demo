@@ -6,8 +6,10 @@ import java.time.Duration
 
 @DiscriminatorValue("DURATION")
 @Entity
-class DurationPeriodPolicyEntity private constructor(coupon: CouponEntity, private val duration: Duration) :
-    ExpirationPeriodPolicyEntity(coupon) {
+class DurationPeriodPolicyEntity private constructor(
+    coupon: CouponEntity,
+    private val duration: Duration
+) : ExpirationPeriodPolicyEntity(coupon) {
     override fun toDomain(): ExpirationPeriodPolicy {
         return DurationPeriodPolicy(duration)
     }

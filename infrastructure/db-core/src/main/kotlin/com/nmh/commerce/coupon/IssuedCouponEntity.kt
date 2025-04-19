@@ -8,8 +8,10 @@ import java.time.LocalDateTime
 
 @Entity
 class IssuedCouponEntity private constructor(
-    @field:ManyToOne val coupon: CouponEntity,
-    @field:ManyToOne val user: UserEntity,
+    @field:ManyToOne
+    val coupon: CouponEntity,
+    @field:ManyToOne
+    val user: UserEntity,
     val issuedAt: LocalDateTime?
 ) : BaseEntity() {
     fun toDomain(): IssuedCoupon {

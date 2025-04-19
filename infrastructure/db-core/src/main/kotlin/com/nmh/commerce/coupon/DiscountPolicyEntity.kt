@@ -9,17 +9,16 @@ import lombok.NoArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discount_policy_type")
-abstract class DiscountPolicyEntity protected constructor(coupon: CouponEntity) : BaseEntity() {
-    @ManyToOne
-    @JoinColumn(name = "coupon_id")
-    private var coupon: CouponEntity?
+abstract class DiscountPolicyEntity protected constructor(
+    @ManyToOne @JoinColumn(name = "coupon_id")
+    private var coupon: CouponEntity
+) : BaseEntity() {
 
     init {
-        this.coupon = coupon
         coupon.addDiscountPolicy(this)
     }
 
-    abstract fun toDomain(): DiscountPolicy?
+    abstract fun toDomain(): DiscountPolicy
 
     companion object {
         fun from(policy: DiscountPolicy, coupon: CouponEntity): DiscountPolicyEntity {
