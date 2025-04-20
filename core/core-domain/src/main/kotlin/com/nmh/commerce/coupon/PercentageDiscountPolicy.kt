@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.domain.DiscountRate
 import com.nmh.commerce.domain.Money
 
-class PercentageDiscountPolicy(
+data class PercentageDiscountPolicy(
     val discountRate: DiscountRate
 ) : DiscountPolicy {
     override fun calculateDiscount(originalPrice: Money): Money {

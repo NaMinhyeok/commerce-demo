@@ -2,7 +2,7 @@ package com.nmh.commerce.coupon
 
 import java.time.LocalDateTime
 
-class DeadlinePeriodPolicy(
+data class DeadlinePeriodPolicy(
     val startAt: LocalDateTime,
     val endAt: LocalDateTime
 ) : ExpirationPeriodPolicy {

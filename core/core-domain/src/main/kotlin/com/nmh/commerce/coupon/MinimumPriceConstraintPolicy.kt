@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.domain.Money
 import com.nmh.commerce.product.Product
 
-class MinimumPriceConstraintPolicy(
+data class MinimumPriceConstraintPolicy(
     val minimumPrice: Money
 ) : ConstraintPolicy {
     override fun verify(product: Product) {

@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.user.User
 import java.time.LocalDateTime
 
-class IssuedCoupon(
+data class IssuedCoupon(
     val id: Long = 0,
     val coupon: Coupon,
     val user: User,
