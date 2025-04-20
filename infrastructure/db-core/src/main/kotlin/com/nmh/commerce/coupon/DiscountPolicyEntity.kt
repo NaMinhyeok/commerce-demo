@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor
 abstract class DiscountPolicyEntity protected constructor(
     @ManyToOne @JoinColumn(name = "coupon_id")
     private var coupon: CouponEntity
-) : BaseEntity() {
+) : BaseEntity<Long>() {
 
     init {
         coupon.addDiscountPolicy(this)

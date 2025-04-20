@@ -6,10 +6,10 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 @MappedSuperclass
-abstract class BaseEntity {
+abstract class BaseEntity<ID> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    open val id: ID? = null
 
     @CreationTimestamp
     @Column
