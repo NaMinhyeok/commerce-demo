@@ -12,7 +12,7 @@ class MinimumPriceConstraintPolicyEntity private constructor(
     coupon: CouponEntity,
     @field:Convert(converter = MoneyConverter::class)
     private val minimumPrice: Money
-) : ConstraintPolicyEntity(coupon) {
+) : ConstraintPolicyEntity(coupon =  coupon) {
     override fun toDomain(): ConstraintPolicy {
         return MinimumPriceConstraintPolicy(minimumPrice)
     }

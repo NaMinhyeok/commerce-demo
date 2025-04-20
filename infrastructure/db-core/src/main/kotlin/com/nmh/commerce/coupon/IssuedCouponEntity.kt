@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 
 @Entity
 class IssuedCouponEntity private constructor(
+    override val id: Long = 0,
     @field:ManyToOne
     val coupon: CouponEntity,
     @field:ManyToOne
@@ -21,6 +22,7 @@ class IssuedCouponEntity private constructor(
     companion object {
         fun from(issuedCoupon: IssuedCoupon): IssuedCouponEntity {
             return IssuedCouponEntity(
+                issuedCoupon.id,
                 CouponEntity.from(issuedCoupon.coupon),
                 UserEntity.from(issuedCoupon.user), issuedCoupon.issuedAt
             )

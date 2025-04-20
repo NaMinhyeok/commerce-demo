@@ -7,6 +7,7 @@ import jakarta.persistence.*
 @DiscriminatorColumn(name = "constraint_policy_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 abstract class ConstraintPolicyEntity protected constructor(
+    override val id: Long = 0,
     @ManyToOne
     @JoinColumn(name = "coupon_id")
     private val coupon: CouponEntity

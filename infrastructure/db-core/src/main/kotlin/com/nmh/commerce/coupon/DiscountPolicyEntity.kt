@@ -6,11 +6,12 @@ import lombok.AccessLevel
 import lombok.NoArgsConstructor
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discount_policy_type")
 abstract class DiscountPolicyEntity protected constructor(
-    @ManyToOne @JoinColumn(name = "coupon_id")
+    override val id: Long = 0,
+    @ManyToOne
+    @JoinColumn(name = "coupon_id")
     private var coupon: CouponEntity
 ) : BaseEntity<Long>() {
 

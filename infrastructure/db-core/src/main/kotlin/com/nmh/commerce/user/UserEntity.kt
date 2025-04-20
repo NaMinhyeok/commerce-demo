@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 
 @Entity
 class UserEntity private constructor(
+    override val id: Long = 0,
     private val name: String
 ) : BaseEntity<Long>() {
     fun toDomain(): User {
@@ -13,7 +14,7 @@ class UserEntity private constructor(
 
     companion object {
         fun from(user: User): UserEntity {
-            return UserEntity(user.name)
+            return UserEntity(user.id, user.name)
         }
     }
 }

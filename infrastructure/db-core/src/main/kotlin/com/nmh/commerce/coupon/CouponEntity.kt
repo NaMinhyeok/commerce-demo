@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany
 
 @Entity
 class CouponEntity(
+    override val id: Long = 0,
     var name: String
 ) : BaseEntity<Long>() {
 
@@ -19,8 +20,6 @@ class CouponEntity(
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
     private var expirationPeriodPolicies: MutableList<ExpirationPeriodPolicyEntity?> =
         ArrayList()
-
-    constructor() : this("")
 
     fun addDiscountPolicy(discountPolicy: DiscountPolicyEntity?) {
         discountPolicies.add(discountPolicy)
@@ -46,8 +45,10 @@ class CouponEntity(
 
     companion object {
         fun from(coupon: Coupon): CouponEntity {
-            val couponEntity = CouponEntity()
-            couponEntity.name = coupon.name
+            val couponEntity = CouponEntity(
+                coupon.id,
+                coupon.name
+            )
             addDiscountPolicies(coupon, couponEntity)
             addConstraintPolicies(coupon, couponEntity)
             addExpirationPeriodPolicies(coupon, couponEntity)

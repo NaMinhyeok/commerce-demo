@@ -12,7 +12,7 @@ class PercentageDiscountPolicyEntity(
     coupon: CouponEntity,
     @field:Convert(converter = DiscountRateConverter::class)
     private val discountRate: DiscountRate
-) : DiscountPolicyEntity(coupon) {
+) : DiscountPolicyEntity(coupon = coupon) {
     override fun toDomain(): DiscountPolicy {
         return PercentageDiscountPolicy(discountRate)
     }

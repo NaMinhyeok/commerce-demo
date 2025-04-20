@@ -4,7 +4,7 @@ import com.nmh.commerce.domain.Quantity
 import com.nmh.commerce.domain.Quantity.Companion.of
 
 class CouponStock(
-    val id: Long?,
+    val id: Long = 0,
     val couponId: Long,
     val remainingQuantity: Quantity,
     val version: Long?
@@ -19,7 +19,7 @@ class CouponStock(
 
     companion object {
         fun of(couponId: Long, remainingQuantity: Quantity): CouponStock? {
-            return CouponStock(null, couponId, remainingQuantity, null)
+            return CouponStock(couponId = couponId, remainingQuantity = remainingQuantity, version = null)
         }
     }
 }
