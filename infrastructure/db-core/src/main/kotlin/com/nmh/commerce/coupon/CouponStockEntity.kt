@@ -7,7 +7,7 @@ import jakarta.persistence.*
 
 @Entity
 class CouponStockEntity private constructor(
-    override val id: Long?,
+    override val id: Long = 0,
     private val couponId: Long,
     @field:Convert(converter = QuantityConverter::class)
     private val remainingQuantity: Quantity,

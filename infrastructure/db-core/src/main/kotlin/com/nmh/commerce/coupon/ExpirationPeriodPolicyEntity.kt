@@ -7,6 +7,7 @@ import jakarta.persistence.*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 abstract class ExpirationPeriodPolicyEntity protected constructor(
+    override val id: Long = 0,
     @ManyToOne
     @JoinColumn(name = "coupon_id")
     private val coupon: CouponEntity

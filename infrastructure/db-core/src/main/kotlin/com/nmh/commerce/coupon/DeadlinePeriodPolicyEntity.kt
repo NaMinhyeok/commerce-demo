@@ -10,7 +10,7 @@ class DeadlinePeriodPolicyEntity private constructor(
     coupon: CouponEntity,
     private val startAt: LocalDateTime,
     private val endAt: LocalDateTime
-) : ExpirationPeriodPolicyEntity(coupon) {
+) : ExpirationPeriodPolicyEntity(coupon = coupon) {
     override fun toDomain(): ExpirationPeriodPolicy {
         return DeadlinePeriodPolicy(startAt, endAt)
     }

@@ -12,7 +12,7 @@ class FixedPriceDiscountPolicyEntity(
     coupon: CouponEntity,
     @field:Convert(converter = MoneyConverter::class)
     private val discountPrice: Money
-) : DiscountPolicyEntity(coupon) {
+) : DiscountPolicyEntity(coupon = coupon) {
     override fun toDomain(): DiscountPolicy {
         return FixedPriceDiscountPolicy(discountPrice)
     }

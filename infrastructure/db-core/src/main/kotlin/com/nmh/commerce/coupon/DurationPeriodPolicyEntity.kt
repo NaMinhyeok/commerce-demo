@@ -9,7 +9,7 @@ import java.time.Duration
 class DurationPeriodPolicyEntity private constructor(
     coupon: CouponEntity,
     private val duration: Duration
-) : ExpirationPeriodPolicyEntity(coupon) {
+) : ExpirationPeriodPolicyEntity(coupon = coupon) {
     override fun toDomain(): ExpirationPeriodPolicy {
         return DurationPeriodPolicy(duration)
     }
