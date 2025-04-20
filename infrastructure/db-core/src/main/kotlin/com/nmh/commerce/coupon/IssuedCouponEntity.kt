@@ -13,7 +13,7 @@ class IssuedCouponEntity private constructor(
     @field:ManyToOne
     val user: UserEntity,
     val issuedAt: LocalDateTime
-) : BaseEntity() {
+) : BaseEntity<Long>() {
     fun toDomain(): IssuedCoupon {
         return IssuedCoupon(id, coupon.toDomain(), user.toDomain(), issuedAt)
     }

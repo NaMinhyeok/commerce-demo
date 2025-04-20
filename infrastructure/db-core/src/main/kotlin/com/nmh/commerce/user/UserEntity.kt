@@ -6,7 +6,7 @@ import jakarta.persistence.Entity
 @Entity
 class UserEntity private constructor(
     private val name: String
-) : BaseEntity() {
+) : BaseEntity<Long>() {
     fun toDomain(): User {
         return User(id, name)
     }

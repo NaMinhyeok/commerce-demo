@@ -8,7 +8,7 @@ import jakarta.persistence.OneToMany
 @Entity
 class CouponEntity(
     var name: String
-) : BaseEntity() {
+) : BaseEntity<Long>() {
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
     private var discountPolicies: MutableList<DiscountPolicyEntity?> = ArrayList()

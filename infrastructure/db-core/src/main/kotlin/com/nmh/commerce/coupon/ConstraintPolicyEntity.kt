@@ -10,7 +10,7 @@ abstract class ConstraintPolicyEntity protected constructor(
     @ManyToOne
     @JoinColumn(name = "coupon_id")
     private val coupon: CouponEntity
-) : BaseEntity() {
+) : BaseEntity<Long>() {
 
     init {
         coupon.addConstraintPolicy(this)
