@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.domain.Quantity
 import com.nmh.commerce.domain.Quantity.Companion.of
 
-class CouponStock(
+data class CouponStock(
     val id: Long = 0,
     val couponId: Long,
     val remainingQuantity: Quantity,
@@ -11,7 +11,7 @@ class CouponStock(
 ) {
     fun deductQuantity(): CouponStock {
         check(this.isRemaining) { "쿠폰 재고가 없습니다." }
-        return CouponStock(this.id, this.couponId, this.remainingQuantity.subtract(of(1)), this.version)
+        return this.copy(remainingQuantity = this.remainingQuantity.subtract(of(1)))
     }
 
     private val isRemaining: Boolean

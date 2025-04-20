@@ -3,7 +3,7 @@ package com.nmh.commerce.coupon
 import java.time.Duration
 import java.time.LocalDateTime
 
-class DurationPeriodPolicy(
+data class DurationPeriodPolicy(
     val duration: Duration
 ) : ExpirationPeriodPolicy {
     override fun verify(issuedAt: LocalDateTime) {
