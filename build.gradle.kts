@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.apply
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
@@ -9,6 +8,7 @@ plugins {
     id("org.springframework.boot") version "3.4.3" apply false
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("jvm") version "1.9.25" apply false
+    id("com.diffplug.spotless") version "7.0.3"
 }
 
 subprojects {
@@ -19,6 +19,7 @@ subprojects {
         plugin("org.jetbrains.kotlin.plugin.spring")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
+        plugin("com.diffplug.spotless")
     }
 
     group = "com.nmh.commerce"
@@ -60,8 +61,22 @@ subprojects {
             freeCompilerArgs.set(
                 listOf(
                     "-Xjsr305=strict",
-                )
+                ),
             )
+        }
+    }
+
+    spotless {
+        kotlin {
+            ktlint("1.5.0")
+                .setEditorConfigPath(file("${rootProject.projectDir}/.editorconfig"))
+            target("**/*.kt")
+            targetExclude("**/build/**/*.kt")
+        }
+
+        kotlinGradle {
+            ktlint()
+            target("**/*.kts")
         }
     }
 
