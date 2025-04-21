@@ -19,12 +19,11 @@ class CouponStockEntity private constructor(
     fun toDomain(): CouponStock = CouponStock(id, couponId, remainingQuantity, version)
 
     companion object {
-        fun from(couponStock: CouponStock): CouponStockEntity =
-            CouponStockEntity(
-                couponStock.id,
-                couponStock.couponId,
-                couponStock.remainingQuantity,
-                couponStock.version,
-            )
+        fun from(couponStock: CouponStock): CouponStockEntity = CouponStockEntity(
+            couponStock.id,
+            couponStock.couponId,
+            couponStock.remainingQuantity,
+            couponStock.version,
+        )
     }
 }

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+stash_name="pre-commit-spotless"
+stash_result=$(git stash create)
+
+if [ -n "$stash_result" ]; then
+    git stash save -k -u "$stash_name"
+    stash_created=true
+else
+    stash_created=false
+fi
+
+if ! ./gradlew spotlessApply --no-daemon --quiet; then
+    echo "❌ spotlessApply failed"
+    [ "$stash_created" = true ] && git stash pop
+    exit 1
+fi
+
+git add .
+
+[ "$stash_created" = true ] && git stash pop
+
+echo "✅ spotless formatting applied successfully"
+
+exit 0

@@ -19,7 +19,6 @@ class FixedPriceDiscountPolicyEntity(
         fun from(
             fixedPriceDiscountPolicy: FixedPriceDiscountPolicy,
             coupon: CouponEntity,
-        ): FixedPriceDiscountPolicyEntity =
-            FixedPriceDiscountPolicyEntity(coupon, fixedPriceDiscountPolicy.discountPrice)
+        ): FixedPriceDiscountPolicyEntity = FixedPriceDiscountPolicyEntity(coupon, fixedPriceDiscountPolicy.discountPrice)
     }
 }

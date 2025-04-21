@@ -19,7 +19,6 @@ class PercentageDiscountPolicyEntity(
         fun from(
             percentageDiscountPolicy: PercentageDiscountPolicy,
             coupon: CouponEntity,
-        ): PercentageDiscountPolicyEntity =
-            PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.discountRate)
+        ): PercentageDiscountPolicyEntity = PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.discountRate)
     }
 }
