@@ -1,18 +1,21 @@
 package com.nmh.commerce.coupon
 
 import com.nmh.commerce.BaseEntity
-import jakarta.persistence.*
+import jakarta.persistence.DiscriminatorColumn
+import jakarta.persistence.Entity
+import jakarta.persistence.Inheritance
+import jakarta.persistence.InheritanceType
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 
 @DiscriminatorColumn(name = "expiration_period_policy_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 abstract class ExpirationPeriodPolicyEntity protected constructor(
     override val id: Long = 0,
-    @ManyToOne
-    @JoinColumn(name = "coupon_id")
-    private val coupon: CouponEntity
+    @ManyToOne @JoinColumn(name = "coupon_id")
+    private val coupon: CouponEntity,
 ) : BaseEntity<Long>() {
-
     init {
         coupon.addExpirationPeriodPolicy(this)
     }
@@ -20,7 +23,10 @@ abstract class ExpirationPeriodPolicyEntity protected constructor(
     abstract fun toDomain(): ExpirationPeriodPolicy
 
     companion object {
-        fun from(policy: ExpirationPeriodPolicy, coupon: CouponEntity): ExpirationPeriodPolicyEntity {
+        fun from(
+            policy: ExpirationPeriodPolicy,
+            coupon: CouponEntity,
+        ): ExpirationPeriodPolicyEntity {
             if (policy is DeadlinePeriodPolicy) {
                 return DeadlinePeriodPolicyEntity.from(policy, coupon)
             }

@@ -9,15 +9,15 @@ import java.time.LocalDateTime
 class DeadlinePeriodPolicyEntity private constructor(
     coupon: CouponEntity,
     private val startAt: LocalDateTime,
-    private val endAt: LocalDateTime
+    private val endAt: LocalDateTime,
 ) : ExpirationPeriodPolicyEntity(coupon = coupon) {
-    override fun toDomain(): ExpirationPeriodPolicy {
-        return DeadlinePeriodPolicy(startAt, endAt)
-    }
+    override fun toDomain(): ExpirationPeriodPolicy = DeadlinePeriodPolicy(startAt, endAt)
 
     companion object {
-        fun from(deadLinePeriodPolicy: DeadlinePeriodPolicy, coupon: CouponEntity): DeadlinePeriodPolicyEntity {
-            return DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt)
-        }
+        fun from(
+            deadLinePeriodPolicy: DeadlinePeriodPolicy,
+            coupon: CouponEntity,
+        ): DeadlinePeriodPolicyEntity =
+            DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt)
     }
 }

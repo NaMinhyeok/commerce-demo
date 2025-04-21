@@ -11,18 +11,15 @@ import jakarta.persistence.Entity
 class PercentageDiscountPolicyEntity(
     coupon: CouponEntity,
     @field:Convert(converter = DiscountRateConverter::class)
-    private val discountRate: DiscountRate
+    private val discountRate: DiscountRate,
 ) : DiscountPolicyEntity(coupon = coupon) {
-    override fun toDomain(): DiscountPolicy {
-        return PercentageDiscountPolicy(discountRate)
-    }
+    override fun toDomain(): DiscountPolicy = PercentageDiscountPolicy(discountRate)
 
     companion object {
         fun from(
             percentageDiscountPolicy: PercentageDiscountPolicy,
-            coupon: CouponEntity
-        ): PercentageDiscountPolicyEntity {
-            return PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.discountRate)
-        }
+            coupon: CouponEntity,
+        ): PercentageDiscountPolicyEntity =
+            PercentageDiscountPolicyEntity(coupon, percentageDiscountPolicy.discountRate)
     }
 }

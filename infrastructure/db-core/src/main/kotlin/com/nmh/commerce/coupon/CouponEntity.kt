@@ -8,9 +8,8 @@ import jakarta.persistence.OneToMany
 @Entity
 class CouponEntity(
     override val id: Long = 0,
-    var name: String
+    var name: String,
 ) : BaseEntity<Long>() {
-
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
     private val discountPolicies: MutableList<DiscountPolicyEntity> = ArrayList()
 
@@ -32,22 +31,28 @@ class CouponEntity(
         expirationPeriodPolicies.add(expirationPeriodPolicy)
     }
 
-    fun toDomain(): Coupon {
-        return Coupon(
+    fun toDomain(): Coupon =
+        Coupon(
             id,
             name,
             discountPolicies.stream().map { obj: DiscountPolicyEntity -> obj.toDomain() }.toList(),
-            constraintPolicies.stream().map { obj: ConstraintPolicyEntity -> obj.toDomain() }.toList(),
-            expirationPeriodPolicies.stream().map { obj: ExpirationPeriodPolicyEntity -> obj.toDomain() }.toList()
+            constraintPolicies
+                .stream()
+                .map { obj: ConstraintPolicyEntity -> obj.toDomain() }
+                .toList(),
+            expirationPeriodPolicies
+                .stream()
+                .map { obj: ExpirationPeriodPolicyEntity -> obj.toDomain() }
+                .toList(),
         )
-    }
 
     companion object {
         fun from(coupon: Coupon): CouponEntity {
-            val couponEntity = CouponEntity(
-                coupon.id,
-                coupon.name
-            )
+            val couponEntity =
+                CouponEntity(
+                    coupon.id,
+                    coupon.name,
+                )
             addDiscountPolicies(coupon, couponEntity)
             addConstraintPolicies(coupon, couponEntity)
             addExpirationPeriodPolicies(coupon, couponEntity)
@@ -55,40 +60,52 @@ class CouponEntity(
             return couponEntity
         }
 
-        private fun addExpirationPeriodPolicies(coupon: Coupon, couponEntity: CouponEntity) {
+        private fun addExpirationPeriodPolicies(
+            coupon: Coupon,
+            couponEntity: CouponEntity,
+        ) {
             couponEntity.expirationPeriodPolicies.addAll(
-                coupon.expirationPeriodPolicies.stream()
+                coupon.expirationPeriodPolicies
+                    .stream()
                     .map { policy: ExpirationPeriodPolicy ->
                         ExpirationPeriodPolicyEntity.from(
                             policy,
-                            couponEntity
+                            couponEntity,
                         )
-                    }
-                    .toList())
+                    }.toList(),
+            )
         }
 
-        private fun addDiscountPolicies(coupon: Coupon, couponEntity: CouponEntity) {
+        private fun addDiscountPolicies(
+            coupon: Coupon,
+            couponEntity: CouponEntity,
+        ) {
             couponEntity.discountPolicies.addAll(
-                coupon.discountPolicies.stream()
+                coupon.discountPolicies
+                    .stream()
                     .map { policy: DiscountPolicy ->
                         DiscountPolicyEntity.from(
                             policy,
-                            couponEntity
+                            couponEntity,
                         )
-                    }
-                    .toList())
+                    }.toList(),
+            )
         }
 
-        private fun addConstraintPolicies(coupon: Coupon, couponEntity: CouponEntity) {
+        private fun addConstraintPolicies(
+            coupon: Coupon,
+            couponEntity: CouponEntity,
+        ) {
             couponEntity.constraintPolicies.addAll(
-                coupon.constraintPolicies.stream()
+                coupon.constraintPolicies
+                    .stream()
                     .map { policy: ConstraintPolicy ->
                         ConstraintPolicyEntity.from(
                             policy,
-                            couponEntity
+                            couponEntity,
                         )
-                    }
-                    .toList())
+                    }.toList(),
+            )
         }
     }
 }

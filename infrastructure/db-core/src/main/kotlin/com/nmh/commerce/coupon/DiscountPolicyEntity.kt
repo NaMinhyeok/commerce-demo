@@ -1,9 +1,12 @@
 package com.nmh.commerce.coupon
 
 import com.nmh.commerce.BaseEntity
-import jakarta.persistence.*
-import lombok.AccessLevel
-import lombok.NoArgsConstructor
+import jakarta.persistence.DiscriminatorColumn
+import jakarta.persistence.Entity
+import jakarta.persistence.Inheritance
+import jakarta.persistence.InheritanceType
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -12,9 +15,8 @@ abstract class DiscountPolicyEntity protected constructor(
     override val id: Long = 0,
     @ManyToOne
     @JoinColumn(name = "coupon_id")
-    private var coupon: CouponEntity
+    private var coupon: CouponEntity,
 ) : BaseEntity<Long>() {
-
     init {
         coupon.addDiscountPolicy(this)
     }
@@ -22,7 +24,10 @@ abstract class DiscountPolicyEntity protected constructor(
     abstract fun toDomain(): DiscountPolicy
 
     companion object {
-        fun from(policy: DiscountPolicy, coupon: CouponEntity): DiscountPolicyEntity {
+        fun from(
+            policy: DiscountPolicy,
+            coupon: CouponEntity,
+        ): DiscountPolicyEntity {
             if (policy is FixedPriceDiscountPolicy) {
                 return FixedPriceDiscountPolicyEntity.from(policy, coupon)
             }

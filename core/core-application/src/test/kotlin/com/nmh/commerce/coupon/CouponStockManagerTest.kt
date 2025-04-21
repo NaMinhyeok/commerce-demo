@@ -46,13 +46,15 @@ internal class CouponStockManagerTest {
         val latch = CountDownLatch(threadCount)
         // when
         for (i in 0..<threadCount) {
-            executorService.execute(Runnable {
-                try {
-                    couponStockManager.deductStock(2L)
-                } finally {
-                    latch.countDown()
-                }
-            })
+            executorService.execute(
+                Runnable {
+                    try {
+                        couponStockManager.deductStock(2L)
+                    } finally {
+                        latch.countDown()
+                    }
+                },
+            )
         }
 
         latch.await()

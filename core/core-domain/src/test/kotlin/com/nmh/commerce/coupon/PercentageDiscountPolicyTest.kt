@@ -10,9 +10,10 @@ internal class PercentageDiscountPolicyTest {
     @Test
     fun 쿠폰을_적용한_후_할인한_가격을_계산한다() {
         // given
-        val policy = PercentageDiscountPolicy(
-            DiscountRate.of(BigDecimal.valueOf(0.1))
-        )
+        val policy =
+            PercentageDiscountPolicy(
+                DiscountRate.of(BigDecimal.valueOf(0.1)),
+            )
         // when
         val result = policy.calculateDiscount(Money.of(BigDecimal.valueOf(10000)))
         // then

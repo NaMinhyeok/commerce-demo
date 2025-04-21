@@ -7,7 +7,7 @@ data class CouponStock(
     val id: Long = 0,
     val couponId: Long,
     val remainingQuantity: Quantity,
-    val version: Long?
+    val version: Long?,
 ) {
     fun deductQuantity(): CouponStock {
         check(this.isRemaining) { "쿠폰 재고가 없습니다." }
@@ -18,8 +18,9 @@ data class CouponStock(
         get() = this.remainingQuantity.isRemaining
 
     companion object {
-        fun of(couponId: Long, remainingQuantity: Quantity): CouponStock? {
-            return CouponStock(couponId = couponId, remainingQuantity = remainingQuantity, version = null)
-        }
+        fun of(
+            couponId: Long,
+            remainingQuantity: Quantity,
+        ): CouponStock? = CouponStock(couponId = couponId, remainingQuantity = remainingQuantity, version = null)
     }
 }

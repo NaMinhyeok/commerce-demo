@@ -24,7 +24,8 @@ internal class CouponStockTest {
         val stock = of(1L, of(0))
         // when
         // then
-        BDDAssertions.thenThrownBy(ThrowableAssert.ThrowingCallable { stock!!.deductQuantity() })
+        BDDAssertions
+            .thenThrownBy(ThrowableAssert.ThrowingCallable { stock!!.deductQuantity() })
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("쿠폰 재고가 없습니다.")
     }

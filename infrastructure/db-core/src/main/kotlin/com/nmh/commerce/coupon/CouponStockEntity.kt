@@ -3,7 +3,9 @@ package com.nmh.commerce.coupon
 import com.nmh.commerce.BaseEntity
 import com.nmh.commerce.domain.Quantity
 import com.nmh.commerce.utils.QuantityConverter
-import jakarta.persistence.*
+import jakarta.persistence.Convert
+import jakarta.persistence.Entity
+import jakarta.persistence.Version
 
 @Entity
 class CouponStockEntity private constructor(
@@ -12,20 +14,17 @@ class CouponStockEntity private constructor(
     @field:Convert(converter = QuantityConverter::class)
     private val remainingQuantity: Quantity,
     @field:Version
-    private val version: Long?
+    private val version: Long?,
 ) : BaseEntity<Long>() {
-    fun toDomain(): CouponStock {
-        return CouponStock(id, couponId, remainingQuantity, version)
-    }
+    fun toDomain(): CouponStock = CouponStock(id, couponId, remainingQuantity, version)
 
     companion object {
-        fun from(couponStock: CouponStock): CouponStockEntity {
-            return CouponStockEntity(
+        fun from(couponStock: CouponStock): CouponStockEntity =
+            CouponStockEntity(
                 couponStock.id,
                 couponStock.couponId,
                 couponStock.remainingQuantity,
-                couponStock.version
+                couponStock.version,
             )
-        }
     }
 }

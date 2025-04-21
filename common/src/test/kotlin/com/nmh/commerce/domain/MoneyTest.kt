@@ -13,8 +13,7 @@ internal class MoneyTest {
         // when
         val result = target.plus(other)
         // then
-        BDDAssertions.then<Money?>(result).extracting("value")
-            .isEqualTo(BigDecimal.valueOf(11))
+        BDDAssertions.then<Money?>(result).extracting("value").isEqualTo(BigDecimal.valueOf(11))
     }
 
     @Test
@@ -25,8 +24,7 @@ internal class MoneyTest {
         // when
         val result = target.minus(other)
         // then
-        BDDAssertions.then<Money?>(result).extracting("value")
-            .isEqualTo(BigDecimal.valueOf(9))
+        BDDAssertions.then<Money?>(result).extracting("value").isEqualTo(BigDecimal.valueOf(9))
     }
 
     @Test
@@ -37,8 +35,7 @@ internal class MoneyTest {
         // when
         val result = target.multiply(other)
         // then
-        BDDAssertions.then<Money?>(result).extracting("value")
-            .isEqualTo(BigDecimal.valueOf(20))
+        BDDAssertions.then<Money?>(result).extracting("value").isEqualTo(BigDecimal.valueOf(20))
     }
 
     @Test
@@ -49,8 +46,7 @@ internal class MoneyTest {
         // when
         val result = target.divide(other)
         // then
-        BDDAssertions.then<Money?>(result).extracting("value")
-            .isEqualTo(BigDecimal.valueOf(5))
+        BDDAssertions.then<Money?>(result).extracting("value").isEqualTo(BigDecimal.valueOf(5))
     }
 
     @Test
