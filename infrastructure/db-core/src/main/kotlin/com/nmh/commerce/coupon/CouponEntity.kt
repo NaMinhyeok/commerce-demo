@@ -12,24 +12,23 @@ class CouponEntity(
 ) : BaseEntity<Long>() {
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
-    private var discountPolicies: MutableList<DiscountPolicyEntity?> = ArrayList()
+    private val discountPolicies: MutableList<DiscountPolicyEntity> = ArrayList()
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
-    private var constraintPolicies: MutableList<ConstraintPolicyEntity?> = ArrayList()
+    private val constraintPolicies: MutableList<ConstraintPolicyEntity> = ArrayList()
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL])
-    private var expirationPeriodPolicies: MutableList<ExpirationPeriodPolicyEntity?> =
-        ArrayList()
+    private val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicyEntity> = ArrayList()
 
-    fun addDiscountPolicy(discountPolicy: DiscountPolicyEntity?) {
+    fun addDiscountPolicy(discountPolicy: DiscountPolicyEntity) {
         discountPolicies.add(discountPolicy)
     }
 
-    fun addConstraintPolicy(constraintPolicy: ConstraintPolicyEntity?) {
+    fun addConstraintPolicy(constraintPolicy: ConstraintPolicyEntity) {
         constraintPolicies.add(constraintPolicy)
     }
 
-    fun addExpirationPeriodPolicy(expirationPeriodPolicy: ExpirationPeriodPolicyEntity?) {
+    fun addExpirationPeriodPolicy(expirationPeriodPolicy: ExpirationPeriodPolicyEntity) {
         expirationPeriodPolicies.add(expirationPeriodPolicy)
     }
 
@@ -37,9 +36,9 @@ class CouponEntity(
         return Coupon(
             id,
             name,
-            discountPolicies.stream().map { obj: DiscountPolicyEntity? -> obj!!.toDomain() }.toList(),
-            constraintPolicies.stream().map { obj: ConstraintPolicyEntity? -> obj!!.toDomain() }.toList(),
-            expirationPeriodPolicies.stream().map { obj: ExpirationPeriodPolicyEntity? -> obj!!.toDomain() }.toList()
+            discountPolicies.stream().map { obj: DiscountPolicyEntity -> obj.toDomain() }.toList(),
+            constraintPolicies.stream().map { obj: ConstraintPolicyEntity -> obj.toDomain() }.toList(),
+            expirationPeriodPolicies.stream().map { obj: ExpirationPeriodPolicyEntity -> obj.toDomain() }.toList()
         )
     }
 
