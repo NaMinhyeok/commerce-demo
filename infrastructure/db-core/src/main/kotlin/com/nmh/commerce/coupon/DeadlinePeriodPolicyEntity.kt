@@ -17,7 +17,6 @@ class DeadlinePeriodPolicyEntity private constructor(
         fun from(
             deadLinePeriodPolicy: DeadlinePeriodPolicy,
             coupon: CouponEntity,
-        ): DeadlinePeriodPolicyEntity =
-            DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt)
+        ): DeadlinePeriodPolicyEntity = DeadlinePeriodPolicyEntity(coupon, deadLinePeriodPolicy.startAt, deadLinePeriodPolicy.endAt)
     }
 }

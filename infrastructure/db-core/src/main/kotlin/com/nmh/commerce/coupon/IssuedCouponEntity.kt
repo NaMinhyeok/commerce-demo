@@ -16,12 +16,11 @@ class IssuedCouponEntity private constructor(
     fun toDomain(): IssuedCoupon = IssuedCoupon(id, coupon.toDomain(), user.toDomain(), issuedAt)
 
     companion object {
-        fun from(issuedCoupon: IssuedCoupon): IssuedCouponEntity =
-            IssuedCouponEntity(
-                issuedCoupon.id,
-                CouponEntity.from(issuedCoupon.coupon),
-                UserEntity.from(issuedCoupon.user),
-                issuedCoupon.issuedAt,
-            )
+        fun from(issuedCoupon: IssuedCoupon): IssuedCouponEntity = IssuedCouponEntity(
+            issuedCoupon.id,
+            CouponEntity.from(issuedCoupon.coupon),
+            UserEntity.from(issuedCoupon.user),
+            issuedCoupon.issuedAt,
+        )
     }
 }

@@ -19,7 +19,6 @@ class MinimumPriceConstraintPolicyEntity private constructor(
         fun from(
             minimumPriceConstraintPolicy: MinimumPriceConstraintPolicy,
             coupon: CouponEntity,
-        ): MinimumPriceConstraintPolicyEntity =
-            MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.minimumPrice)
+        ): MinimumPriceConstraintPolicyEntity = MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.minimumPrice)
     }
 }

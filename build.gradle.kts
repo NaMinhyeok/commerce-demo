@@ -81,3 +81,22 @@ subprojects {
     }
 
 }
+
+tasks.register<Copy>("installGitHooks") {
+    description = "공유된 git hooks를 .git/hooks/로 복사"
+    group = "git"
+
+    from("$rootDir/.githooks/")
+    into("$rootDir/.git/hooks/")
+
+    filePermissions {
+        user {
+            execute = true
+            read = true
+            write = true
+        }
+        group.execute = true
+        other.execute = true
+    }
+}
+
