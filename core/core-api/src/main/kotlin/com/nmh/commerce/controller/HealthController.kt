@@ -6,7 +6,5 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class HealthController {
-    fun health(): ResponseEntity<Any?> {
-        return ResponseEntity.status(HttpStatus.OK).build<Any?>()
-    }
+    fun health(): ResponseEntity<Any?> = ResponseEntity.status(HttpStatus.OK).build<Any?>()
 }

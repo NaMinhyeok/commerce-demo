@@ -12,7 +12,8 @@ internal class QuantityTest {
         // given
         // when
         // then
-        BDDAssertions.thenThrownBy(ThrowableAssert.ThrowingCallable { of(-1) })
+        BDDAssertions
+            .thenThrownBy(ThrowableAssert.ThrowingCallable { of(-1) })
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("수량은 0 이상이어야 합니다.")
     }
@@ -43,7 +44,8 @@ internal class QuantityTest {
         val quantity = of(10)
         // when
         // then
-        BDDAssertions.thenThrownBy(ThrowableAssert.ThrowingCallable { quantity.subtract(of(11)) })
+        BDDAssertions
+            .thenThrownBy(ThrowableAssert.ThrowingCallable { quantity.subtract(of(11)) })
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("수량이 부족합니다.")
     }
@@ -52,7 +54,7 @@ internal class QuantityTest {
     fun 재고가_남아있는지_여부를_확인한다() {
         Assertions.assertAll(
             { BDDAssertions.then(of(1).isRemaining).isTrue() },
-            { BDDAssertions.then(of(0).isRemaining).isFalse() }
+            { BDDAssertions.then(of(0).isRemaining).isFalse() },
         )
     }
 }

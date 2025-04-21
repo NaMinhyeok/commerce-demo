@@ -2,7 +2,9 @@ package com.nmh.commerce.domain
 
 import java.math.BigDecimal
 
-class DiscountRate private constructor(value: BigDecimal) {
+class DiscountRate private constructor(
+    value: BigDecimal,
+) {
     val value: BigDecimal
 
     init {
@@ -17,13 +19,9 @@ class DiscountRate private constructor(value: BigDecimal) {
         return value.compareTo(discountRate.value) == 0
     }
 
-    override fun hashCode(): Int {
-        return value.stripTrailingZeros().hashCode()
-    }
+    override fun hashCode(): Int = value.stripTrailingZeros().hashCode()
 
     companion object {
-        fun of(value: BigDecimal): DiscountRate {
-            return DiscountRate(value)
-        }
+        fun of(value: BigDecimal): DiscountRate = DiscountRate(value)
     }
 }

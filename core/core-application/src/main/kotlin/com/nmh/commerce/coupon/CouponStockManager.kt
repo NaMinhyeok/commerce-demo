@@ -9,8 +9,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Slf4j
 @Component
-class CouponStockManager(private val stockRepository: CouponStockRepository) {
-    @Retryable(retryFor = [IllegalStateException::class], maxAttempts = 5, backoff = Backoff(delay = 10000L))
+class CouponStockManager(
+    private val stockRepository: CouponStockRepository,
+) {
+    @Retryable(
+        retryFor = [IllegalStateException::class],
+        maxAttempts = 5,
+        backoff = Backoff(delay = 10000L),
+    )
     @Transactional
     fun deductStock(couponId: Long): CouponStock {
         val stock = stockRepository.findByCouponId(couponId)
@@ -19,7 +25,8 @@ class CouponStockManager(private val stockRepository: CouponStockRepository) {
     }
 
     @Recover
-    fun recover(e: IllegalStateException, couponId: Long?): CouponStock? {
-        throw e
-    }
+    fun recover(
+        e: IllegalStateException,
+        couponId: Long?,
+    ): CouponStock? = throw e
 }

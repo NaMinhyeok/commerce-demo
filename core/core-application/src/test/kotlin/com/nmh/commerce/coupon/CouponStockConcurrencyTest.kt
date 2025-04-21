@@ -1,7 +1,6 @@
 package com.nmh.commerce.coupon
 
 import com.nmh.commerce.CoreApplicationIntegrationTest
-import com.nmh.commerce.coupon.CouponStock.Companion.of
 import com.nmh.commerce.domain.Quantity.Companion.of
 import org.assertj.core.api.BDDAssertions
 import org.junit.jupiter.api.Disabled
@@ -11,7 +10,7 @@ import java.util.concurrent.Executors
 
 class CouponStockConcurrencyTest(
     private val couponStockRepository: CouponStockRepository,
-    private val couponStockManager: CouponStockManager
+    private val couponStockManager: CouponStockManager,
 ) : CoreApplicationIntegrationTest() {
     @Disabled("잠시 비활성화")
     @Test
@@ -27,13 +26,15 @@ class CouponStockConcurrencyTest(
         val latch = CountDownLatch(threadCount)
         // when
         for (i in 0..<threadCount) {
-            executorService.execute(Runnable {
-                try {
-                    couponStockManager.deductStock(savedStock.couponId)
-                } finally {
-                    latch.countDown()
-                }
-            })
+            executorService.execute(
+                Runnable {
+                    try {
+                        couponStockManager.deductStock(savedStock.couponId)
+                    } finally {
+                        latch.countDown()
+                    }
+                },
+            )
         }
 
         latch.await()

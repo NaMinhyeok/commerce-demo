@@ -9,11 +9,14 @@ data class Coupon(
     val name: String,
     val discountPolicies: MutableList<DiscountPolicy>,
     val constraintPolicies: MutableList<ConstraintPolicy>,
-    val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>
+    val expirationPeriodPolicies: MutableList<ExpirationPeriodPolicy>,
 ) {
     fun apply(product: Product): Money {
-        constraintPolicies.forEach(Consumer { constraintPolicy: ConstraintPolicy -> constraintPolicy.verify(product) })
-        return discountPolicies.stream()
+        constraintPolicies.forEach(
+            Consumer { constraintPolicy: ConstraintPolicy -> constraintPolicy.verify(product) },
+        )
+        return discountPolicies
+            .stream()
             .map { discountPolicy: DiscountPolicy -> discountPolicy.calculateDiscount(product.price) }
             .reduce(Money.ZERO) { obj: Money, other: Money -> obj.plus(other) }
     }

@@ -11,18 +11,15 @@ import jakarta.persistence.Entity
 class MinimumPriceConstraintPolicyEntity private constructor(
     coupon: CouponEntity,
     @field:Convert(converter = MoneyConverter::class)
-    private val minimumPrice: Money
-) : ConstraintPolicyEntity(coupon =  coupon) {
-    override fun toDomain(): ConstraintPolicy {
-        return MinimumPriceConstraintPolicy(minimumPrice)
-    }
+    private val minimumPrice: Money,
+) : ConstraintPolicyEntity(coupon = coupon) {
+    override fun toDomain(): ConstraintPolicy = MinimumPriceConstraintPolicy(minimumPrice)
 
     companion object {
         fun from(
             minimumPriceConstraintPolicy: MinimumPriceConstraintPolicy,
-            coupon: CouponEntity
-        ): MinimumPriceConstraintPolicyEntity {
-            return MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.minimumPrice)
-        }
+            coupon: CouponEntity,
+        ): MinimumPriceConstraintPolicyEntity =
+            MinimumPriceConstraintPolicyEntity(coupon, minimumPriceConstraintPolicy.minimumPrice)
     }
 }

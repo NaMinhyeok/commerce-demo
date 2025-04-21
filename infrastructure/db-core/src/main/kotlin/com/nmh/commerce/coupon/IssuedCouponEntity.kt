@@ -9,23 +9,19 @@ import java.time.LocalDateTime
 @Entity
 class IssuedCouponEntity private constructor(
     override val id: Long = 0,
-    @field:ManyToOne
-    val coupon: CouponEntity,
-    @field:ManyToOne
-    val user: UserEntity,
-    val issuedAt: LocalDateTime
+    @field:ManyToOne val coupon: CouponEntity,
+    @field:ManyToOne val user: UserEntity,
+    val issuedAt: LocalDateTime,
 ) : BaseEntity<Long>() {
-    fun toDomain(): IssuedCoupon {
-        return IssuedCoupon(id, coupon.toDomain(), user.toDomain(), issuedAt)
-    }
+    fun toDomain(): IssuedCoupon = IssuedCoupon(id, coupon.toDomain(), user.toDomain(), issuedAt)
 
     companion object {
-        fun from(issuedCoupon: IssuedCoupon): IssuedCouponEntity {
-            return IssuedCouponEntity(
+        fun from(issuedCoupon: IssuedCoupon): IssuedCouponEntity =
+            IssuedCouponEntity(
                 issuedCoupon.id,
                 CouponEntity.from(issuedCoupon.coupon),
-                UserEntity.from(issuedCoupon.user), issuedCoupon.issuedAt
+                UserEntity.from(issuedCoupon.user),
+                issuedCoupon.issuedAt,
             )
-        }
     }
 }

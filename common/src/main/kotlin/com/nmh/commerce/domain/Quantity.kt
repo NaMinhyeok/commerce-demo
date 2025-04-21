@@ -1,11 +1,11 @@
 package com.nmh.commerce.domain
 
-import java.util.*
+import java.util.Objects
 
-class Quantity private constructor(val value: Int) {
-    fun add(quantity: Quantity): Quantity {
-        return Quantity(this.value + quantity.value)
-    }
+class Quantity private constructor(
+    val value: Int,
+) {
+    fun add(quantity: Quantity): Quantity = Quantity(this.value + quantity.value)
 
     fun subtract(quantity: Quantity): Quantity {
         require(this.value >= quantity.value) { "수량이 부족합니다." }
@@ -21,9 +21,7 @@ class Quantity private constructor(val value: Int) {
         return value == quantity.value
     }
 
-    override fun hashCode(): Int {
-        return Objects.hashCode(value)
-    }
+    override fun hashCode(): Int = Objects.hashCode(value)
 
     companion object {
         fun of(value: Int): Quantity {

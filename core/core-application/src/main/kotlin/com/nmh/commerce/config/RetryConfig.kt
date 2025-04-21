@@ -5,4 +5,4 @@ import org.springframework.retry.annotation.EnableRetry
 
 @EnableRetry
 @Configuration
-class RetryConfig 
+class RetryConfig

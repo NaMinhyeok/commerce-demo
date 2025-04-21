@@ -8,15 +8,14 @@ import java.time.Duration
 @Entity
 class DurationPeriodPolicyEntity private constructor(
     coupon: CouponEntity,
-    private val duration: Duration
+    private val duration: Duration,
 ) : ExpirationPeriodPolicyEntity(coupon = coupon) {
-    override fun toDomain(): ExpirationPeriodPolicy {
-        return DurationPeriodPolicy(duration)
-    }
+    override fun toDomain(): ExpirationPeriodPolicy = DurationPeriodPolicy(duration)
 
     companion object {
-        fun from(durationPeriodPolicy: DurationPeriodPolicy, coupon: CouponEntity): DurationPeriodPolicyEntity {
-            return DurationPeriodPolicyEntity(coupon, durationPeriodPolicy.duration)
-        }
+        fun from(
+            durationPeriodPolicy: DurationPeriodPolicy,
+            coupon: CouponEntity,
+        ): DurationPeriodPolicyEntity = DurationPeriodPolicyEntity(coupon, durationPeriodPolicy.duration)
     }
 }

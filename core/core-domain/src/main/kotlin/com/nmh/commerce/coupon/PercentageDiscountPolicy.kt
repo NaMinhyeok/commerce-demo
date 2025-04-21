@@ -4,7 +4,7 @@ import com.nmh.commerce.domain.DiscountRate
 import com.nmh.commerce.domain.Money
 
 data class PercentageDiscountPolicy(
-    val discountRate: DiscountRate
+    val discountRate: DiscountRate,
 ) : DiscountPolicy {
     override fun calculateDiscount(originalPrice: Money): Money {
         val discountPrice = originalPrice.apply(discountRate)

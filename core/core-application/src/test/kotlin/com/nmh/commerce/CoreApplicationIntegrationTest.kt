@@ -7,4 +7,4 @@ import org.springframework.test.context.TestConstructor
 @ActiveProfiles("local")
 @SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-abstract class CoreApplicationIntegrationTest 
+abstract class CoreApplicationIntegrationTest

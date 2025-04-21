@@ -9,9 +9,10 @@ internal class FixedPriceDiscountPolicyTest {
     @Test
     fun 쿠폰을_적용한_후_할인한_가격을_계산한다() {
         // given
-        val policy = FixedPriceDiscountPolicy(
-            Money.of(BigDecimal.valueOf(1000))
-        )
+        val policy =
+            FixedPriceDiscountPolicy(
+                Money.of(BigDecimal.valueOf(1000)),
+            )
         // when
         val result = policy.calculateDiscount(Money.of(BigDecimal.valueOf(10000)))
         // then

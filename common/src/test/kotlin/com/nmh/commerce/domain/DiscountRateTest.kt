@@ -13,20 +13,23 @@ internal class DiscountRateTest {
         // when
         val discountRate = DiscountRate.of(BigDecimal.valueOf(0.33))
         // then
-        BDDAssertions.then(discountRate.value)
-            .isEqualTo(BigDecimal.valueOf(0.33))
+        BDDAssertions.then(discountRate.value).isEqualTo(BigDecimal.valueOf(0.33))
     }
 
     @ParameterizedTest
     @CsvSource(
-        value = ["-0.1", "1.1"
-        ]
+        value =
+            [
+                "-0.1",
+                "1.1",
+            ],
     )
     fun 할인율은_0과1사이이다(value: BigDecimal) {
         // given
         // when
         // then
-        BDDAssertions.thenThrownBy { DiscountRate.of(value) }
+        BDDAssertions
+            .thenThrownBy { DiscountRate.of(value) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("할인율은 0 이상 1 이하의 값이어야 합니다.")
     }
