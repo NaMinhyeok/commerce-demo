@@ -2,7 +2,7 @@ package com.nmh.commerce.learning
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import org.assertj.core.api.BDDAssertions
+import org.assertj.core.api.BDDAssertions.then
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.MySQLContainer
@@ -75,7 +75,7 @@ class MySQLIndexPerformanceTest {
             val withIndexTimeNs = measureQueryTimeNano(conn, "SELECT * FROM user WHERE email = 'user500@example.com'")
             println("With index time: $withIndexTimeNs ns (${withIndexTimeNs / 1_000_000.0} ms)")
 
-            BDDAssertions.then(withIndexTimeNs).isLessThan(noIndexTimeNs)
+            then(withIndexTimeNs).isLessThan(noIndexTimeNs)
         }
     }
 
@@ -126,7 +126,7 @@ class MySQLIndexPerformanceTest {
             printExplain(conn, "SELECT * FROM user WHERE age = 30 AND name = 'User10'")
             printExplain(conn, "SELECT * FROM user WHERE name = 'User10' AND age = 30")
 
-            BDDAssertions.then(correctOrderTime).isLessThan(wrongOrderTime)
+            then(correctOrderTime).isLessThan(wrongOrderTime)
             /*
             항상 순서가 잘못되어있다고 해서 인덱스를 사용하지 않는 것은 아니다.
             하지만 인덱스의 순서에 맞게 쿼리를 작성하는 것이 성능을 최적화하는 데 도움이 된다.
@@ -135,6 +135,43 @@ class MySQLIndexPerformanceTest {
             인덱스를 탈지 안탈지 여부는 내가 쿼리를 잘 작성하는 것과 연관은 없다.
             물론 인덱스를 사용하도록 유도할 수 있지만 실제로 인덱스를 사용할지 사용하지 않을 지 선택하는 것은 MySQLd의 옵티마이저가 결정한다.
              */
+        }
+    }
+
+    @Test
+    fun `Range Scan 테스트`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            val noIndexTime = measureQueryTimeNano(conn, "SELECT * FROM user WHERE age BETWEEN 20 AND 30")
+            println("No index range scan time: $noIndexTime ns (${noIndexTime / 1_000_000.0} ms)")
+            printExplain(conn, "SELECT * FROM user WHERE age BETWEEN 20 AND 30")
+
+            conn.createStatement().execute("CREATE INDEX idx_user_age ON user (age)")
+
+            val time = measureQueryTimeNano(conn, "SELECT * FROM user WHERE age BETWEEN 20 AND 30")
+            println("Range scan query time: $time ns (${time / 1_000_000.0} ms)")
+            printExplain(conn, "SELECT * FROM user WHERE age BETWEEN 20 AND 30")
+
+            then(time).isLessThan(noIndexTime)
+        }
+    }
+
+    @Test
+    fun `LIKE 절을 인덱스를 사용하기 위해서는 %keyword%로 검색 할 수 없다`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name ON user (name)")
+
+            val prefixLikeTime = measureQueryTimeNano(conn, "SELECT * FROM user WHERE name LIKE 'User1%'")
+            val infixLikeTime = measureQueryTimeNano(conn, "SELECT * FROM user WHERE name LIKE '%ser1'")
+
+            println("Prefix LIKE index query time: $prefixLikeTime ns (${prefixLikeTime / 1_000_000.0} ms)")
+            println("Infix LIKE no index query time: $infixLikeTime ns (${infixLikeTime / 1_000_000.0} ms)")
+
+            printExplain(conn, "SELECT * FROM user WHERE name LIKE 'User1%'")
+            printExplain(conn, "SELECT * FROM user WHERE name LIKE '%ser1'")
+
+            then(infixLikeTime).isLessThan(prefixLikeTime)
         }
     }
 
@@ -161,6 +198,20 @@ class MySQLIndexPerformanceTest {
                     println(row)
                 }
             }
+        }
+    }
+
+    private fun prepareTestData(conn: Connection) {
+        val insertSQL = "INSERT INTO user (name, email, age, created_at) VALUES (?, ?, ?, NOW())"
+        conn.prepareStatement(insertSQL).use { ps ->
+            for (i in 1..1_000) {
+                ps.setString(1, "User${i % 100}")
+                ps.setString(2, "user$i@example.com")
+                ps.setInt(3, i % 50)
+                ps.addBatch()
+                if (i % 100 == 0) ps.executeBatch()
+            }
+            ps.executeBatch()
         }
     }
 }
