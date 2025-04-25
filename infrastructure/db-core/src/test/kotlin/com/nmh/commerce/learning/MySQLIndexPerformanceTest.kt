@@ -175,6 +175,78 @@ class MySQLIndexPerformanceTest {
         }
     }
 
+    @Test
+    fun `GROUP BY와 커버링 인덱스 가능 케이스`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name_age_created_at ON user (name, age, created_at)")
+
+            // 커버링 인덱스 사용 가능: SELECT, WHERE, GROUP BY가 모두 인덱스 컬럼만 사용하고, 순서도 인덱스 컬럼 순서와 일치.
+            val query = "SELECT name, age, created_at FROM user WHERE name = 'User10' GROUP BY name, age, created_at"
+            measureQueryWithExplain(conn, query)
+        }
+    }
+
+    @Test
+    fun `GROUP BY에서 인덱스 컬럼 일부만 사용하여 커버링이 가능한 경우`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name_age_created_at ON user (name, age, created_at)")
+
+            // 커버링 인덱스 가능:
+            // SELECT와 GROUP BY가 (name, age)까지만 사용하지만, 인덱스 앞부분만 사용해도 커버링 인덱스 성립.
+            // created_at은 SELECT/GROUP BY에 없어도 영향 없음 (필요한 컬럼만 인덱스에 있으면 커버링 가능).
+            val query = "SELECT name, age FROM user WHERE name = 'User10' GROUP BY name, age"
+            measureQueryWithExplain(conn, query)
+        }
+    }
+
+    @Test
+    fun `HAVING에서 인덱스 외 컬럼 사용 시 커버링 불가능`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name_age_created_at ON user (name, age, created_at)")
+
+            // 커버링 인덱스 사용 가능:
+            // COUNT(*)는 row 개수만 세는 것이므로 인덱스 컬럼만으로 계산 가능 → 커버링 인덱스 O
+            //
+            // 참고: 인덱스 외 컬럼(SUM(score) 등)을 HAVING에서 사용하는 경우 커버링 인덱스가 불가능하고 테이블 row 접근이 필요하다.
+            val query = "SELECT name, age, created_at FROM user WHERE name = 'User10' GROUP BY name, age, created_at HAVING COUNT(*) > 1"
+            measureQueryWithExplain(conn, query)
+        }
+    }
+
+    @Test
+    fun `ORDER BY가 인덱스 순서와 일치할 때 커버링 가능`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name_age_created_at ON user (name, age, created_at)")
+
+            // 커버링 인덱스 + ORDER BY 순서 일치:
+            // name → age → created_at 순서로 인덱스와 정렬 조건이 일치하므로 filesort 없이 인덱스 스캔만으로 정렬 가능.
+            val query = "SELECT name, age, created_at FROM user WHERE name = 'User10' ORDER BY name, age, created_at"
+            measureQueryWithExplain(conn, query)
+        }
+    }
+
+    @Test
+    fun `ORDER BY가 인덱스 순서와 다를 때 커버링 불가능`() {
+        dataSource.connection.use { conn ->
+            prepareTestData(conn)
+            conn.createStatement().execute("CREATE INDEX idx_user_name_age_created_at ON user (name, age, created_at)")
+
+            // 커버링 인덱스는 가능하나, ORDER BY 순서가 다르면 filesort 발생할 수 있음.
+            // 단, name이 WHERE로 고정되면 사실상 ORDER BY age만 남아서 인덱스 정렬 순서를 그대로 활용할 수 있다.
+            val query = "SELECT name, age, created_at FROM user WHERE name = 'User10' ORDER BY age, name"
+            measureQueryWithExplain(conn, query)
+
+            /*
+             * 주의: name이 WHERE로 고정되면 그룹 안에서는 age 순서가 유지되므로
+             * 인덱스 정렬 순서와 실질적으로 충돌하지 않고 정렬이 유지될 수 있다.
+             */
+        }
+    }
+
     private fun measureQueryTimeNano(conn: Connection, query: String): Long = measureNanoTime {
         conn.prepareStatement(query).use { ps ->
             ps.executeQuery().use { rs ->
@@ -213,5 +285,19 @@ class MySQLIndexPerformanceTest {
             }
             ps.executeBatch()
         }
+    }
+
+    private fun measureQueryWithExplain(conn: Connection, query: String) {
+        val time = measureNanoTime {
+            conn.prepareStatement(query).use { ps ->
+                ps.executeQuery().use { rs ->
+                    while (rs.next()) {
+                        /* Do nothing */
+                    }
+                }
+            }
+        }
+        println("Query time: $time ns (${time / 1_000_000.0} ms)")
+        printExplain(conn, query)
     }
 }
