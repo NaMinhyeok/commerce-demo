@@ -1,0 +1,4 @@
+exchange:
+  host:
+    key: ${EXCHANGE_HOST_KEY}
+    url: http://api.exchangerate.host
