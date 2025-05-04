@@ -35,6 +35,12 @@ subprojects {
         mavenCentral()
     }
 
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.5")
+        }
+    }
+
     dependencies {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
