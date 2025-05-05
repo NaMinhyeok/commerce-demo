@@ -44,9 +44,8 @@ subprojects {
     dependencies {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        compileOnly("org.projectlombok:lombok")
-        annotationProcessor("org.projectlombok:lombok")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     }
 
     tasks.withType<Test> {
