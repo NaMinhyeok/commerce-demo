@@ -1,4 +1,4 @@
 exchange:
   host:
-    key: ${EXCHANGE_HOST_KEY}
+    access-key: ${EXCHANGE_HOST_KEY:10441f302f187bba92ab015a65ae1678}
     url: http://api.exchangerate.host

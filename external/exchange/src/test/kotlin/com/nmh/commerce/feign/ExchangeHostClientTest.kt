@@ -9,7 +9,7 @@ class ExchangeHostClientTest(
 
     @Test
     fun `호출요청이 올바른지 확인한다`() {
-        exchangeHostClient.getLive("USD")
+        exchangeHostClient.getLive()
             .apply {
                 println("response = $this")
             }
