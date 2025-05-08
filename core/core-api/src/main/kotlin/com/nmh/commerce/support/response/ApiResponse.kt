@@ -2,9 +2,7 @@ package com.nmh.commerce.support.response
 
 import com.nmh.commerce.support.error.ErrorMessage
 import com.nmh.commerce.support.error.ErrorType
-import lombok.Getter
 
-@Getter
 class ApiResponse<S> private constructor(
     private val result: ResultType,
     private val data: S?,

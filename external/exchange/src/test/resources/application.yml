@@ -1,0 +1,6 @@
+spring.application.name: external-exchange-test
+
+spring:
+  config:
+    import:
+      - external-exchange.yml

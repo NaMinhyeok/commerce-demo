@@ -5,4 +5,5 @@ spring:
   config:
     import:
       - db-core.yml
+      - external-exchange.yml
   web.resources.add-mappings: false

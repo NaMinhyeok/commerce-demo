@@ -1,13 +1,11 @@
 package com.nmh.commerce.coupon
 
-import lombok.extern.slf4j.Slf4j
 import org.springframework.retry.annotation.Backoff
 import org.springframework.retry.annotation.Recover
 import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Slf4j
 @Component
 class CouponStockManager(
     private val stockRepository: CouponStockRepository,
