@@ -1,0 +1,22 @@
+exchange:
+  host:
+    access-key: ${EXCHANGE_HOST_KEY:10441f302f187bba92ab015a65ae1678}
+    url: http://api.exchangerate.host
+
+# Enable Feign client fallbacks
+feign:
+  circuitbreaker:
+    enabled: true
+
+resilience4j:
+  ratelimiter:
+    instances:
+      exchangeHostClient:
+        limitForPeriod: 10
+        limitRefreshPeriod: 60s
+        timeoutDuration: 5s
+        registerHealthIndicator: true
+
+  # Configure fallback behavior
+  fallback:
+    enabled: true
