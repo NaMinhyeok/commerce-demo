@@ -5,7 +5,7 @@ plugins {
 dependencies {
     implementation(project(":core:core-domain"))
     implementation(project(":common"))
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    api("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.testcontainers:mysql")
     testImplementation("org.testcontainers:junit-jupiter")
