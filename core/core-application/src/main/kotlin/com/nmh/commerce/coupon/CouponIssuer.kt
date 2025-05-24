@@ -21,7 +21,7 @@ class CouponIssuer(
     ): IssuedCoupon {
         val coupon = couponRepository.findById(couponId)
         val user = userRepository.findById(userId)
-        val issuedCoupon = issue(coupon, user, localDateTimeHolder.now())
+        val issuedCoupon = coupon.issue(user, localDateTimeHolder.now())
         stockManager.deductStock(couponId)
         return issuedCouponRepository.save(issuedCoupon)
     }
