@@ -10,8 +10,6 @@ dependencies {
     testImplementation("org.testcontainers:mysql")
     testImplementation("org.testcontainers:junit-jupiter")
     implementation("mysql:mysql-connector-java:8.0.33")
-    implementation("org.ehcache:ehcache:3.10.8")
-    implementation("javax.cache:cache-api:1.1.1")
 }
 
 allOpen {
