@@ -12,7 +12,6 @@ import javax.cache.CacheManager
 import javax.cache.Caching
 import javax.cache.configuration.MutableConfiguration
 import javax.cache.expiry.CreatedExpiryPolicy
-import javax.cache.expiry.Duration as JCacheDuration
 
 @Configuration
 @EnableCaching
@@ -42,7 +41,7 @@ class CacheConfig {
         setTypes(String::class.java, Any::class.java)
         setStoreByValue(false)
         setStatisticsEnabled(true)
-        setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(JCacheDuration(TimeUnit.SECONDS, ttl.seconds)))
+        setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(javax.cache.expiry.Duration(TimeUnit.SECONDS, ttl.seconds)))
         logger.info("캐시 설정 완료 캐시이름 : $cacheName with TTL: $ttl")
     }
 }
