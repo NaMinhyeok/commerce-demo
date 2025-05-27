@@ -37,8 +37,8 @@ class CacheConfig {
         return cacheManager
     }
 
-    private fun createCacheConfig(cacheName: String, ttl: Duration) = MutableConfiguration<String, Any>().apply {
-        setTypes(String::class.java, Any::class.java)
+    private fun createCacheConfig(cacheName: String, ttl: Duration) = MutableConfiguration<Any, Any>().apply {
+        setTypes(Any::class.java, Any::class.java)
         setStoreByValue(false)
         setStatisticsEnabled(true)
         setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(javax.cache.expiry.Duration(TimeUnit.SECONDS, ttl.seconds)))
