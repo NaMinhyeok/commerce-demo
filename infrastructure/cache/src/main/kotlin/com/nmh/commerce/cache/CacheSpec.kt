@@ -6,5 +6,5 @@ enum class CacheSpec(
     val cacheName: String,
     val ttl: Duration,
 ) {
-    USER("user", Duration.ofHours(1)),
+    USER(CacheName.USER, Duration.ofHours(1)),
 }
