@@ -4,7 +4,7 @@ import com.nmh.commerce.CoreCacheContextTest
 import com.nmh.commerce.cache.CacheSpec
 import org.assertj.core.api.BDDAssertions.then
 import org.junit.jupiter.api.Test
-import javax.cache.CacheManager
+import org.springframework.cache.CacheManager
 
 class CacheConfigTest(
     private val cacheManager: CacheManager,

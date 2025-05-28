@@ -10,4 +10,7 @@ class UserService(
 ) {
     @Cacheable(cacheNames = [CacheName.USER], key = "#id")
     fun getUser(id: Long) = userRepository.findById(id)
+
+    @Cacheable(cacheNames = ["ANYCACHENAME"], key = "#id")
+    fun getUserWithDefaultCacheName(id: Long): User = userRepository.findById(id)
 }
