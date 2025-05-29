@@ -168,4 +168,18 @@ class CaffeineCacheTest {
         then(allPresent.size).isLessThan(3)
         then(allPresent.values.sumOf { it.length }).isLessThanOrEqualTo(10)
     }
+
+    @Test
+    fun `recordStats() 설정을 통해 캐시의 통계를 확인할 수 있다`() {
+        val cache = Caffeine.newBuilder()
+            .recordStats()
+            .build<Any, Any>()
+
+        cache.put("key1", "value1")
+        cache.get("key1") { "value1" }
+        cache.get("key2") { "value2" }
+
+        val stats = cache.stats()
+        println("캐시 통계: $stats")
+    }
 }
