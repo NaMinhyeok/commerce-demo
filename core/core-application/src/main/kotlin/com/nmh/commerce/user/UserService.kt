@@ -1,6 +1,5 @@
 package com.nmh.commerce.user
 
-import com.nmh.commerce.cache.CacheName
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 

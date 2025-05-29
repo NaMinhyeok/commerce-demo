@@ -58,25 +58,17 @@ class CacheConfig {
 
     @Primary
     @Bean
-    fun caffeineCacheManager(): CacheManager {
-        val cacheManager = CaffeineCacheManager()
-
-        cacheManager.setCaffeine(
-            Caffeine.newBuilder()
-                .recordStats(),
-        )
-
+    fun caffeineCacheManager(): CacheManager = CaffeineCacheManager().apply {
+        setCaffeine(Caffeine.newBuilder().recordStats())
         CacheSpec.entries.forEach { spec ->
-            val caffeine = Caffeine.newBuilder()
-                .expireAfterWrite(spec.ttl)
-                .recordStats()
-                .build<Any, Any>()
-
-            cacheManager.registerCustomCache(spec.cacheName, caffeine)
-
+            registerCustomCache(
+                spec.cacheName,
+                Caffeine.newBuilder()
+                    .recordStats()
+                    .expireAfterWrite(spec.ttl)
+                    .build(),
+            )
             logger.info("Caffeine 캐시 설정 완료: ${spec.cacheName} with TTL: ${spec.ttl}")
         }
-
-        return cacheManager
     }
 }
