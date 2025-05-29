@@ -133,4 +133,39 @@ class CaffeineCacheTest {
                 }
         }
     }
+
+    @Test
+    fun `캐시의 최대 용량을 제한 할 수 있다`() {
+        val cache = Caffeine.newBuilder()
+            .maximumSize(2)
+            .recordStats()
+            .build<Any, Any>().apply {
+                put("key1", "value1")
+                put("key2", "value2")
+                put("key3", "value3")
+            }
+
+        val cacheAllMaps = cache.getAllPresent(listOf("key1", "key2", "key3"))
+        then(cacheAllMaps.size).isLessThanOrEqualTo(2)
+        println("현재 캐시에 남아있는 항목: $cacheAllMaps")
+    }
+
+    @Test
+    fun `weight를 제한하여 가변크기에 대해 제한 할 수 있다`() {
+        val cache = Caffeine.newBuilder()
+            .maximumWeight(10)
+            .weigher { key: String, value: String -> value.length }
+            .build<String, String>().apply {
+                put("key1", "value1")
+                put("key2", "value2")
+                put("key3", "value3")
+            }
+
+        val allPresent = cache.getAllPresent(listOf("key1", "key2", "key3"))
+
+        println("현재 캐시에 남아있는 항목: $allPresent")
+
+        then(allPresent.size).isLessThan(3)
+        then(allPresent.values.sumOf { it.length }).isLessThanOrEqualTo(10)
+    }
 }
