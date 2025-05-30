@@ -1,0 +1,36 @@
+= API Docs
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:snippets: build/generated-snippets
+
+== Introduce
+
+This is the Core API documentation.
+
+== Example API
+
+=== GET Product API
+==== Curl Request
+include::{snippets}/getProduct/curl-request.adoc[]
+==== Path Parameters
+include::{snippets}/getProduct/path-parameters.adoc[]
+==== Http Response
+include::{snippets}/getProduct/http-response.adoc[]
+==== Response Fields
+include::{snippets}/getProduct/response-fields.adoc[]
+
+'''
+
+=== Register Product API
+==== Curl Request
+include::{snippets}/registerProduct/curl-request.adoc[]
+==== Request Fields
+include::{snippets}/registerProduct/request-fields.adoc[]
+==== Http Response
+include::{snippets}/registerProduct/http-response.adoc[]
+==== Response Fields
+include::{snippets}/registerProduct/response-fields.adoc[]

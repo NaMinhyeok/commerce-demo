@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
 import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import org.springframework.restdocs.request.RequestDocumentation
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
@@ -81,6 +82,10 @@ class ProductControllerTest : RestDocsTest() {
                     "registerProduct",
                     requestPreprocessor(),
                     responsePreprocessor(),
+                    requestFields(
+                        fieldWithPath("name").type(JsonFieldType.STRING).description("상품 이름"),
+                        fieldWithPath("price").type(JsonFieldType.NUMBER).description("상품 가격"),
+                    ),
                     responseFields(
                         fieldWithPath("result").type(JsonFieldType.STRING).description("ResultType"),
                         fieldWithPath("data").type(JsonFieldType.NULL).description("결과"),
