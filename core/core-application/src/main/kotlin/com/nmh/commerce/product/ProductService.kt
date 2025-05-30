@@ -8,7 +8,9 @@ class ProductService(
 ) {
     fun getProduct(id: Long): Product = productRepository.findById(id)
 
-    fun saveProduct(product: Product): Product = productRepository.save(product)
+    fun saveProduct(product: Product) {
+        productRepository.save(product)
+    }
 
     fun getAllProducts(): List<Product> = productRepository.findAll()
 
