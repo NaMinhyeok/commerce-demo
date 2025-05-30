@@ -46,6 +46,7 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        testImplementation("com.ninja-squad:springmockk:4.0.2")
     }
 
     tasks.withType<Test> {
