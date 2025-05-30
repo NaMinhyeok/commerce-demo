@@ -5,7 +5,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation(project(":core:core-domain"))
     implementation(project(":common"))
-//    implementation(project(":external:exchange"))
+    implementation(project(":external:exchange"))
     implementation(project(":infrastructure:cache"))
 
     testImplementation(project(":infrastructure:db-core"))
