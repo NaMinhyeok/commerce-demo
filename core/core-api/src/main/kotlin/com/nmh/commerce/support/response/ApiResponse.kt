@@ -5,11 +5,11 @@ import com.nmh.commerce.support.error.ErrorType
 
 class ApiResponse<S> private constructor(
     val result: ResultType,
-    val data: S,
+    val data: S?,
     val error: ErrorMessage?,
 ) {
     companion object {
-        fun success(): ApiResponse<*> = ApiResponse<Any?>(ResultType.SUCCESS, null, null)
+        fun success(): ApiResponse<Any> = ApiResponse(ResultType.SUCCESS, null, null)
 
         fun <S> success(data: S): ApiResponse<S> = ApiResponse(ResultType.SUCCESS, data, null)
 
