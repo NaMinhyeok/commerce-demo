@@ -2,7 +2,9 @@ package com.nmh.commerce.product
 
 import com.nmh.commerce.BaseEntity
 import com.nmh.commerce.domain.Money
+import jakarta.persistence.Entity
 
+@Entity
 class ProductEntity private constructor(
     override val id: Long = 0,
     val name: String,
